@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:service_man/core/global/bloc/global_event.dart';
+import 'package:service_man/core/global/provider/global_provider.dart';
 import 'package:service_man/pages/splash/splash_screen.dart';
+
+import 'core/global/bloc/global_bloc.dart';
+import 'pages/auth/login_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp
   ]);
-  runApp(ServiceManApp());
+  runApp(
+      ChangeNotifierProvider<GlobalProvider>(
+        create: (context) => GlobalProvider(),
+        child: BlocProvider<GlobalBloc>(
+          create: (context) =>
+          GlobalBloc(context)
+            ..add(CheckStatus()),
+          child: ServiceManApp(),
+        ),
+      ));
 }
 
 class ServiceManApp extends StatelessWidget {
@@ -16,35 +32,33 @@ class ServiceManApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
-        value: SystemUiOverlayStyle.light,
+      value: SystemUiOverlayStyle.light,
       child: ScreenUtilInit(
         designSize: Size(375, 812),
-        builder: () => MaterialApp(
-          title: 'Flutter Demo',
-          initialRoute: '/',
-          onGenerateRoute: _getRoutes,
-          theme: ThemeData(
-            // This is the theme of your application.
-            //
-            // Try running your application with "flutter run". You'll see the
-            // application has a blue toolbar. Then, without quitting the app, try
-            // changing the primarySwatch below to Colors.green and then invoke
-            // "hot reload" (press "r" in the console where you ran "flutter run",
-            // or simply save your changes to "hot reload" in a Flutter IDE).
-            // Notice that the counter didn't reset back to zero; the application
-            // is not restarted.
-            primarySwatch: Colors.blue,
-          ),
-        ),
+        builder: () =>
+            MaterialApp(
+              title: 'Flutter Demo',
+              initialRoute: '/',
+              onGenerateRoute: _getRoutes,
+              theme: ThemeData(
+                // This is the theme of your application.
+                //
+                // Try running your application with "flutter run". You'll see the
+                // application has a blue toolbar. Then, without quitting the app, try
+                // changing the primarySwatch below to Colors.green and then invoke
+                // "hot reload" (press "r" in the console where you ran "flutter run",
+                // or simply save your changes to "hot reload" in a Flutter IDE).
+                // Notice that the counter didn't reset back to zero; the application
+                // is not restarted.
+                primarySwatch: Colors.blue,
+              ),
+            ),
       ),
     );
-      
-
   }
 }
 
 Route<dynamic> _getRoutes(RouteSettings settings) {
-
   Widget builder = Container();
   bool fullScreenDialog = false;
   switch (settings.name) {
@@ -67,17 +81,18 @@ Route<dynamic> _getRoutes(RouteSettings settings) {
       fullscreenDialog: fullScreenDialog,
       settings: settings
   );
-
 }
 
 class NavigationPage extends StatefulWidget {
-  static final GlobalKey<NavigatorState> attachmentNavKey = GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> navKey = GlobalKey<
+      NavigatorState>();
 
   @override
-  _NavigationPageState createState() => _NavigationPageState();
+  NavigationPageState createState() => NavigationPageState();
 }
 
-class _NavigationPageState extends State<NavigationPage> with WidgetsBindingObserver {
+class NavigationPageState extends State<NavigationPage>
+    with WidgetsBindingObserver {
 
   @override
   void initState() {
@@ -100,14 +115,28 @@ class _NavigationPageState extends State<NavigationPage> with WidgetsBindingObse
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
+    return BlocListener<GlobalBloc, GlobalState>(
+      listener: (context, state) {
+        if (state is NotSignedIn) {
+          // navigate to login page
+          NavigationPage.navKey.currentState.pushNamedAndRemoveUntil('navigation/login', (route) => false);
+        }
+
+        if (state is SignedIn) {
+          // navigate to home page
+          NavigationPage.navKey.currentState.pushNamedAndRemoveUntil('navigation/home', (route) => false);
+        }
+
+      },
+      child: WillPopScope(
         onWillPop: () async {
-          return !await NavigationPage.attachmentNavKey.currentState.maybePop();
+          return !await NavigationPage.navKey.currentState.maybePop();
         },
         child: Navigator(
-        key: NavigationPage.attachmentNavKey,
-        initialRoute: 'navigation',
-        onGenerateRoute: _myRoutes,
+          key: NavigationPage.navKey,
+          initialRoute: 'navigation',
+          onGenerateRoute: _myRoutes,
+        ),
       ),
     );
   }
@@ -120,10 +149,13 @@ class _NavigationPageState extends State<NavigationPage> with WidgetsBindingObse
         builder = _Splash();
         break;
 
+      case 'navigation/login':
+        builder = LoginScreen();
+        break;
+
       default:
         throw Exception('ServiceManApp: Invalid route: ${settings.name}');
         break;
-
     }
 
     return MaterialPageRoute(
