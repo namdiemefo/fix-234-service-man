@@ -26,6 +26,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Stream<LoginState> _submitForm(String staffId, String password) async* {
+    yield OnLoading();
     LoginRequestModel loginRequestModel = LoginRequestModel(staffId: staffId, password: password);
     Tuple2<LoginResponseModel, String> response = await _authRepository.loginTechnician(loginRequestModel);
 

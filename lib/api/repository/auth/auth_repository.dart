@@ -1,11 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:service_man/api/middleware/error_interceptor.dart';
-import 'package:service_man/api/middleware/response_interceptor.dart';
-import 'package:service_man/api/models/auth/request/change_password_request_model.dart';
-import 'package:service_man/api/models/auth/request/forgot_password_request_model.dart';
 import 'package:service_man/api/models/auth/request/login_request_model.dart';
-import 'package:service_man/api/models/auth/request/verify_otp_request_model.dart';
 import 'package:service_man/api/models/auth/response/login_response_model.dart';
 import 'package:service_man/api/models/response_model.dart';
 import 'package:service_man/api/repository/auth/auth_interface.dart';
@@ -33,7 +29,6 @@ class AuthRepository extends AuthInterface {
         requestBody: true,
         requestHeader: true
       ),
-      ResponseInterceptor(),
       ErrorInterceptor(),
       ClientServerErrorInterceptor()
     ]);
@@ -56,10 +51,6 @@ class AuthRepository extends AuthInterface {
     } on DioError catch (e) {
       return Tuple2(null, e.response.data);
     }
-
-
-
-
 
   }
 

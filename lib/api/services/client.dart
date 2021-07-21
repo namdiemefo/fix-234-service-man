@@ -20,16 +20,16 @@ abstract class Client {
 
   //AUTH
   @POST('technician/auth/login')
-  Future<MyResponseModel> login(LoginRequestModel loginRequestModel);
+  Future<MyResponseModel> login(@Body() LoginRequestModel loginRequestModel);
 
   @POST('technician/auth/forgot')
-  Future<MyResponseModel> forgot(ForgotPasswordRequestModel forgotPasswordRequestModel);
+  Future<MyResponseModel> forgot(@Body() ForgotPasswordRequestModel forgotPasswordRequestModel);
 
   @POST('technician/auth/change')
-  Future<MyResponseModel> change(@Header('Authorization') String token, ChangePasswordRequestModel changePasswordRequestModel);
+  Future<MyResponseModel> change(@Header('Authorization') String token, @Body() ChangePasswordRequestModel changePasswordRequestModel);
 
   @POST('technician/auth/verify')
-  Future<MyResponseModel> verify(@Header('Authorization') String token, VerifyOtpRequestModel verifyOtpRequestModel);
+  Future<MyResponseModel> verify(@Header('Authorization') String token, @Body() VerifyOtpRequestModel verifyOtpRequestModel);
 
   // PROFILE
   @POST('technician/auth/upload')
@@ -44,14 +44,14 @@ abstract class Client {
   Future<MyResponseModel> bookings(@Header('Authorization') String token);
 
   @PUT('technician/booking/status')
-  Future<MyResponseModel> status(@Header('Authorization') String token, UpdateStatusRequestModel updateStatusRequestModel);
+  Future<MyResponseModel> status(@Header('Authorization') String token, @Body() UpdateStatusRequestModel updateStatusRequestModel);
 
   @PUT('technician/booking/request')
-  Future<MyResponseModel> request(@Header('Authorization') String token, ReassignmentRequestModel reassignmentRequestModel);
+  Future<MyResponseModel> request(@Header('Authorization') String token, @Body() ReassignmentRequestModel reassignmentRequestModel);
 
   //BILL
   @POST('technician/booking/bill')
-  Future<MyResponseModel> createBill(@Header('Authorization') String token, BillRequestModel billRequestModel);
+  Future<MyResponseModel> createBill(@Header('Authorization') String token, @Body() BillRequestModel billRequestModel);
 
   @GET('technician/booking/bills')
   Future<MyResponseModel> bills(@Header('Authorization') String token);

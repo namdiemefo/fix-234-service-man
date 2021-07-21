@@ -13,32 +13,10 @@ class ResponseInterceptor extends Interceptor {
       print('data is ' + response.data.toString());
       print('data is ' + response.toString());
       MyResponseModel responseModel = MyResponseModel.fromJson(response.data);
-      if (responseModel.code == 200) {
-        if (responseModel.data == null) {
-          response.data = responseModel;
-          handler.next(response);
-          return response;
-        } else {
-          response.data = responseModel;
-          handler.next(response);
-          return response;
-        }
-      } else {
-        String message;
-        message = responseModel.message;
-        return new DioError(
-            error: message,
-            type: DioErrorType.response,
-            requestOptions: response.requestOptions,
-            response: Response(
-                data: message,
-                requestOptions: response.requestOptions,
-                statusCode: HttpStatus.badRequest,
-                statusMessage: BAD_REQUEST_STATUS_MESSAGE
-            )
-        );
-      }
+      response.data = responseModel;
     }
+    handler.next(response);
+    return response;
   }
 
 }

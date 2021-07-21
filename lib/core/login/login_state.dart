@@ -9,7 +9,14 @@ class LoginInitial extends LoginState {
   List<Object> get props => [];
 }
 
+class OnLoading extends LoginState {
+  OnLoading();
+  @override
+  List<Object> get props => [];
+}
+
 class OnSuccess extends LoginState {
+  OnSuccess();
   @override
   List<Object> get props => [];
 

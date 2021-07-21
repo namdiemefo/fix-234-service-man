@@ -18,13 +18,16 @@ class _Client implements Client {
   @override
   Future<MyResponseModel> login(loginRequestModel) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = loginRequestModel.toJson();
+    final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    _data.addAll(loginRequestModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, 'technician/auth/login',
-                    queryParameters: queryParameters)
+                    queryParameters: queryParameters,
+                    data: _data
+            )
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;
@@ -33,13 +36,16 @@ class _Client implements Client {
   @override
   Future<MyResponseModel> forgot(forgotPasswordRequestModel) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = forgotPasswordRequestModel.toJson();
+    final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    _data.addAll(forgotPasswordRequestModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, 'technician/auth/forgot',
-                    queryParameters: queryParameters)
+                    queryParameters: queryParameters,
+                data: _data
+            )
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;
@@ -48,15 +54,18 @@ class _Client implements Client {
   @override
   Future<MyResponseModel> change(token, changePasswordRequestModel) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = changePasswordRequestModel.toJson();
+    final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    _data.addAll(changePasswordRequestModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(Options(
                 method: 'POST',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(_dio.options, 'technician/auth/change',
-                queryParameters: queryParameters)
+                queryParameters: queryParameters,
+            data: _data
+        )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;
@@ -65,15 +74,18 @@ class _Client implements Client {
   @override
   Future<MyResponseModel> verify(token, verifyOtpRequestModel) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = verifyOtpRequestModel.toJson();
+    final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    _data.addAll(verifyOtpRequestModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(Options(
                 method: 'POST',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(_dio.options, 'technician/auth/verify',
-                queryParameters: queryParameters)
+                queryParameters: queryParameters,
+            data: _data
+        )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;
@@ -94,7 +106,9 @@ class _Client implements Client {
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(_dio.options, 'technician/auth/upload',
-                queryParameters: queryParameters)
+                queryParameters: queryParameters,
+            data: _data
+        )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;
@@ -137,15 +151,18 @@ class _Client implements Client {
   @override
   Future<MyResponseModel> status(token, updateStatusRequestModel) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = updateStatusRequestModel.toJson();
+    final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    _data.addAll(updateStatusRequestModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(Options(
                 method: 'PUT',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(_dio.options, 'technician/booking/status',
-                queryParameters: queryParameters)
+                queryParameters: queryParameters,
+            data: _data
+        )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;
@@ -154,15 +171,18 @@ class _Client implements Client {
   @override
   Future<MyResponseModel> request(token, reassignmentRequestModel) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = reassignmentRequestModel.toJson();
+    final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    _data.addAll(reassignmentRequestModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(Options(
                 method: 'PUT',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(_dio.options, 'technician/booking/request',
-                queryParameters: queryParameters)
+                queryParameters: queryParameters,
+            data: _data
+        )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;
@@ -171,15 +191,17 @@ class _Client implements Client {
   @override
   Future<MyResponseModel> createBill(token, billRequestModel) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = billRequestModel.toJson();
+    final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    _data.addAll(billRequestModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(Options(
                 method: 'POST',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(_dio.options, 'technician/booking/bill',
-                queryParameters: queryParameters)
+                queryParameters: queryParameters,
+            data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;

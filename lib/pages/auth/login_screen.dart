@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:service_man/core/login/login_bloc.dart';
 import 'package:service_man/helpers/assets/colors.dart';
 import 'package:service_man/helpers/reusable_screens/app_button.dart';
+import 'package:service_man/helpers/reusable_screens/app_loader.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -30,17 +31,31 @@ class __LoginScreenState extends State<_LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
+
+      listenWhen: (prevState, nextState) {
+        if (prevState is OnLoading) {
+          Load.dismiss(context);
+        }
+        return null;
+      },
+
      listener: (context, state) {
        if (state is OnFailure) {
          AppUtils.showErrorFlushBar(context, state.error);
        }
-  },
-  child: BlocBuilder<LoginBloc, LoginState>(
-  builder: (context, state) {
 
-    if (state is OnSuccess) {
-      AppUtils.showSuccessFlushBar(context, 'success');
-    }
+       if (state is OnSuccess) {
+         AppUtils.showSuccessFlushBar(context, 'success');
+       }
+
+       if (state is OnLoading) {
+         Load.show(context);
+       }
+    },
+      child: BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+
+
 
     return Scaffold(
       backgroundColor: bMilk,
