@@ -1,50 +1,3 @@
-/// status : "Success"
-/// code : 200
-/// message : "Authentication Successful"
-/// technician : {"firstTime":2,"isEmailVerified":false,"isPhoneVerified":false,"available":false,"changePasswordRequired":false,"resetPasswordToken":"","resetPasswordExpires":null,"_id":"60e25aae04c9b8001597a9f5","fullName":"Nancy Feyi","email":"nancyfeyi@yahoo.com","phone":"+23490807732","type":"Generator","password":"$2a$10$P19rZUjMmMKEXJCp2G8HcuYLLr8Gkvx3UIyshfSp9At35sOsrdWJC","staffId":"FX-0001","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbmN5ZmV5aUB5YWhvby5jb20iLCJpZCI6IjYwZTI1YWFlMDRjOWI4MDAxNTk3YTlmNSIsImlhdCI6MTYyNTQ1MTk3NSwiZXhwIjozMjUwOTI3OTUwLCJpc3MiOiJJT05FQyJ9.vbslBipkXa5yY3EPdf2KWHF4YEIzp_UopOA-TwG3Ua4","createdAt":"2021-07-05T01:04:46.809Z","updatedAt":"2021-07-05T02:26:14.463Z","__v":0}
-
-class LoginResponse {
-  String _status;
-  int _code;
-  String _message;
-  Technician _technician;
-
-  String get status => _status;
-  int get code => _code;
-  String get message => _message;
-  Technician get technician => _technician;
-
-  LoginResponse({
-      String status, 
-      int code, 
-      String message, 
-      Technician technician}){
-    _status = status;
-    _code = code;
-    _message = message;
-    _technician = technician;
-}
-
-  LoginResponse.fromJson(dynamic json) {
-    _status = json["status"];
-    _code = json["code"];
-    _message = json["message"];
-    _technician = json["technician"] != null ? Technician.fromJson(json["technician"]) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["status"] = _status;
-    map["code"] = _code;
-    map["message"] = _message;
-    if (_technician != null) {
-      map["technician"] = _technician.toJson();
-    }
-    return map;
-  }
-
-}
-
 /// firstTime : 2
 /// isEmailVerified : false
 /// isPhoneVerified : false
@@ -64,7 +17,7 @@ class LoginResponse {
 /// updatedAt : "2021-07-05T02:26:14.463Z"
 /// __v : 0
 
-class Technician {
+class LoginResponseModel {
   int _firstTime;
   bool _isEmailVerified;
   bool _isPhoneVerified;
@@ -103,7 +56,7 @@ class Technician {
   String get updatedAt => _updatedAt;
   int get v => _v;
 
-  Technician({
+  LoginResponseModel({
       int firstTime, 
       bool isEmailVerified, 
       bool isPhoneVerified, 
@@ -142,7 +95,7 @@ class Technician {
     _v = v;
 }
 
-  Technician.fromJson(dynamic json) {
+  LoginResponseModel.fromJson(dynamic json) {
     _firstTime = json["firstTime"];
     _isEmailVerified = json["isEmailVerified"];
     _isPhoneVerified = json["isPhoneVerified"];
