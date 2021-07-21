@@ -3,11 +3,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:service_man/api/models/auth/change_password_response_model.dart';
-import 'package:service_man/api/models/auth/forgot_password_response_model.dart';
-import 'package:service_man/api/models/auth/login_response.dart';
-import 'package:service_man/api/models/auth/login_response_model.dart';
-import 'package:service_man/api/models/auth/verify_otp_response_model.dart';
+import 'package:service_man/api/models/auth/request/change_password_request_model.dart';
+import 'package:service_man/api/models/auth/request/forgot_password_request_model.dart';
+import 'package:service_man/api/models/auth/request/login_request_model.dart';
+import 'package:service_man/api/models/auth/request/verify_otp_request_model.dart';
 import 'package:service_man/api/models/bill/bill_request_model.dart';
 import 'package:service_man/api/models/bookings/reassignment_request_model.dart';
 import 'package:service_man/api/models/bookings/update_status_request_model.dart';
@@ -21,16 +20,16 @@ abstract class Client {
 
   //AUTH
   @POST('technician/auth/login')
-  Future<MyResponseModel> login(LoginResponseModel loginResponseModel);
+  Future<MyResponseModel> login(LoginRequestModel loginRequestModel);
 
   @POST('technician/auth/forgot')
-  Future<MyResponseModel> forgot(ForgotPasswordResponseModel forgotPasswordResponseModel);
+  Future<MyResponseModel> forgot(ForgotPasswordRequestModel forgotPasswordRequestModel);
 
   @POST('technician/auth/change')
-  Future<MyResponseModel> change(@Header('Authorization') String token, ChangePasswordResponseModel changePasswordResponseModel);
+  Future<MyResponseModel> change(@Header('Authorization') String token, ChangePasswordRequestModel changePasswordRequestModel);
 
   @POST('technician/auth/verify')
-  Future<MyResponseModel> verify(@Header('Authorization') String token, VerifyOtpResponseModel verifyOtpResponseModel);
+  Future<MyResponseModel> verify(@Header('Authorization') String token, VerifyOtpRequestModel verifyOtpRequestModel);
 
   // PROFILE
   @POST('technician/auth/upload')

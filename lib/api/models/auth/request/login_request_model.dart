@@ -1,21 +1,21 @@
 /// staffId : "FX-0001"
 /// password : "IONEC"
 
-class LoginResponseModel {
+class LoginRequestModel {
   String _staffId;
   String _password;
 
   String get staffId => _staffId;
   String get password => _password;
 
-  LoginResponseModel({
+  LoginRequestModel({
       String staffId,
       String password}){
     _staffId = staffId;
     _password = password;
 }
 
-  LoginResponseModel.fromJson(dynamic json) {
+  LoginRequestModel.fromJson(dynamic json) {
     _staffId = json["staffId"];
     _password = json["password"];
   }

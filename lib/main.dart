@@ -5,12 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:service_man/core/global/bloc/global_event.dart';
 import 'package:service_man/core/global/provider/global_provider.dart';
+import 'package:service_man/helpers/di/service_locator.dart';
 import 'package:service_man/pages/splash/splash_screen.dart';
 
 import 'core/global/bloc/global_bloc.dart';
 import 'pages/auth/login_screen.dart';
 
 void main() {
+  setUpLocator();
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp

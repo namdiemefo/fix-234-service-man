@@ -1,21 +1,21 @@
 /// oldPassword : "barcelona"
 /// newPassword : "adeola"
 
-class ChangePasswordResponseModel {
+class ChangePasswordRequestModel {
   String _oldPassword;
   String _newPassword;
 
   String get oldPassword => _oldPassword;
   String get newPassword => _newPassword;
 
-  ChangePasswordResponseModel({
+  ChangePasswordRequestModel({
       String oldPassword, 
       String newPassword}){
     _oldPassword = oldPassword;
     _newPassword = newPassword;
 }
 
-  ChangePasswordResponseModel.fromJson(dynamic json) {
+  ChangePasswordRequestModel.fromJson(dynamic json) {
     _oldPassword = json["oldPassword"];
     _newPassword = json["newPassword"];
   }

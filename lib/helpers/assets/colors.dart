@@ -11,3 +11,6 @@ Color bLightPurple = Color(0xffA4A0BD);
 Color bFadedGrey = Color(0xff999999);
 Color lightGrey = Color(0xffD5D5D5);
 Color bWhite = Color(0xffFFFFFF);
+Color bHintColor = Color(0xff6D7278);
+Color bCheckedColor = Color(0xff3CC13B);
+Color bRedCard = Color(0xffFC6364);

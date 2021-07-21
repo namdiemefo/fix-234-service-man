@@ -1,21 +1,21 @@
 /// phone : "+23409080773642"
 /// code : "5982"
 
-class VerifyOtpResponseModel {
+class VerifyOtpRequestModel {
   String _phone;
   String _code;
 
   String get phone => _phone;
   String get code => _code;
 
-  VerifyOtpResponseModel({
+  VerifyOtpRequestModel({
       String phone, 
       String code}){
     _phone = phone;
     _code = code;
 }
 
-  VerifyOtpResponseModel.fromJson(dynamic json) {
+  VerifyOtpRequestModel.fromJson(dynamic json) {
     _phone = json["phone"];
     _code = json["code"];
   }

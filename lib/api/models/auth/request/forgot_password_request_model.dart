@@ -1,16 +1,16 @@
 /// email : "nnaemefo@gmail.com"
 
-class ForgotPasswordResponseModel {
+class ForgotPasswordRequestModel {
   String _email;
 
   String get email => _email;
 
-  ForgotPasswordResponseModel({
+  ForgotPasswordRequestModel({
       String email}){
     _email = email;
 }
 
-  ForgotPasswordResponseModel.fromJson(dynamic json) {
+  ForgotPasswordRequestModel.fromJson(dynamic json) {
     _email = json["email"];
   }
 

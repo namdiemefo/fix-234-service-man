@@ -11,12 +11,12 @@ class CheckStatus extends GlobalEvent {
 }
 
 class SignIn extends GlobalEvent {
-  final String email;
+  final String id;
   final String password;
 
-  SignIn(this.email, this.password);
+  SignIn(this.id, this.password);
   @override
-  List<Object> get props => [email, password];
+  List<Object> get props => [id, password];
 
 }
 

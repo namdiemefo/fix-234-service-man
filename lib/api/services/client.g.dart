@@ -16,9 +16,9 @@ class _Client implements Client {
   String baseUrl;
 
   @override
-  Future<MyResponseModel> login(loginResponseModel) async {
+  Future<MyResponseModel> login(loginRequestModel) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = loginRequestModel.toJson();
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(
@@ -31,9 +31,9 @@ class _Client implements Client {
   }
 
   @override
-  Future<MyResponseModel> forgot(forgotPasswordResponseModel) async {
+  Future<MyResponseModel> forgot(forgotPasswordRequestModel) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = forgotPasswordRequestModel.toJson();
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(
@@ -46,9 +46,9 @@ class _Client implements Client {
   }
 
   @override
-  Future<MyResponseModel> change(token, changePasswordResponseModel) async {
+  Future<MyResponseModel> change(token, changePasswordRequestModel) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = changePasswordRequestModel.toJson();
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(Options(
@@ -63,9 +63,9 @@ class _Client implements Client {
   }
 
   @override
-  Future<MyResponseModel> verify(token, verifyOtpResponseModel) async {
+  Future<MyResponseModel> verify(token, verifyOtpRequestModel) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = verifyOtpRequestModel.toJson();
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(Options(
@@ -137,7 +137,7 @@ class _Client implements Client {
   @override
   Future<MyResponseModel> status(token, updateStatusRequestModel) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = updateStatusRequestModel.toJson();
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(Options(
@@ -154,7 +154,7 @@ class _Client implements Client {
   @override
   Future<MyResponseModel> request(token, reassignmentRequestModel) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = reassignmentRequestModel.toJson();
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(Options(
@@ -171,7 +171,7 @@ class _Client implements Client {
   @override
   Future<MyResponseModel> createBill(token, billRequestModel) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = billRequestModel.toJson();
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(Options(
