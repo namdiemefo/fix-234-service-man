@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:service_man/core/global/bloc/global_event.dart';
 import 'package:service_man/core/global/provider/global_provider.dart';
 import 'package:service_man/helpers/di/service_locator.dart';
+import 'package:service_man/pages/bill/equipment_screen.dart';
 import 'package:service_man/pages/details/details_screen.dart';
 import 'package:service_man/pages/home/home_screen.dart';
 import 'package:service_man/pages/splash/splash_screen.dart';
@@ -163,6 +164,10 @@ class NavigationPageState extends State<NavigationPage>
 
       case 'navigator/details':
         builder = DetailScreen();
+        break;
+
+      case 'navigation/equipment':
+        builder = EquipmentScreen();
         break;
 
       default:

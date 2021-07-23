@@ -293,7 +293,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         buttonText: 'Create Bill',
                         enabledColor: bYellow,
                         voidCallback: () {
-
+                          Navigator.pushNamed(context, 'navigation/equipment');
                         },
                       )
                   )
