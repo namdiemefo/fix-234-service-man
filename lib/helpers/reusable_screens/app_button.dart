@@ -9,6 +9,7 @@ class AppButton extends StatelessWidget {
   final VoidCallback voidCallback;
   final bool enabled;
   final Color enabledColor;
+  final Color textColor;
   final num width;
   final num height;
 
@@ -20,6 +21,7 @@ class AppButton extends StatelessWidget {
         this.voidCallback,
         this.enabled,
         this.enabledColor,
+        this.textColor
         })
       : super(key: key);
 
@@ -27,7 +29,7 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ButtonTheme(
         minWidth: width != null ? width : 200.0,
-        height: height != null ? height : 65.0,
+        height: height != null ? height : 50.0,
         child: RaisedButton(
             padding: EdgeInsets.symmetric(vertical: 16, horizontal: 28),
             shape: RoundedRectangleBorder(
@@ -42,7 +44,7 @@ class AppButton extends StatelessWidget {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: bWhite,
+                color: textColor == null ? bWhite : textColor,
                 // letterSpacing: 0.88,
               ).apply(fontWeightDelta: 1),
             ),

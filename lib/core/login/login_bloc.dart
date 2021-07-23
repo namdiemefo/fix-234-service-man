@@ -30,12 +30,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginRequestModel loginRequestModel = LoginRequestModel(staffId: staffId, password: password);
     Tuple2<LoginResponseModel, String> response = await _authRepository.loginTechnician(loginRequestModel);
 
+
     if (response.item1 is LoginResponseModel) {
-      await _appStorage.persistToken(
-        {
-          TokenType.ACCESS: response.item1.token
-        }
-      );
+      await _appStorage.persistToken({TokenType.ACCESS: response.item1.token});
+      await _appStorage.persistUser(response.item1);
       yield OnSuccess();
     } else if (response.item2 is String) {
       yield OnFailure(response.item2);

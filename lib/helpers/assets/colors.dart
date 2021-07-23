@@ -13,4 +13,5 @@ Color lightGrey = Color(0xffD5D5D5);
 Color bWhite = Color(0xffFFFFFF);
 Color bHintColor = Color(0xff6D7278);
 Color bCheckedColor = Color(0xff3CC13B);
+Color bGreen = Color(0xff2DBB54);
 Color bRedCard = Color(0xffFC6364);

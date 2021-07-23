@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:service_man/core/global/bloc/global_event.dart';
 import 'package:service_man/core/global/provider/global_provider.dart';
 import 'package:service_man/helpers/di/service_locator.dart';
+import 'package:service_man/pages/details/details_screen.dart';
+import 'package:service_man/pages/home/home_screen.dart';
 import 'package:service_man/pages/splash/splash_screen.dart';
 
 import 'core/global/bloc/global_bloc.dart';
@@ -153,6 +155,14 @@ class NavigationPageState extends State<NavigationPage>
 
       case 'navigation/login':
         builder = LoginScreen();
+        break;
+
+      case 'navigation/home':
+        builder = HomeScreen();
+        break;
+
+      case 'navigator/details':
+        builder = DetailScreen();
         break;
 
       default:

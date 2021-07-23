@@ -1,5 +1,5 @@
 class Images {
-  static const String baseIconPath = "assets/icons/";
+  static const String baseIconPath = "assets/icons";
 
   static const bill = '$baseIconPath/bill.svg';
   static const camera = '$baseIconPath/camera.svg';

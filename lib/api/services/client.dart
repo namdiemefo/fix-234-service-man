@@ -8,8 +8,8 @@ import 'package:service_man/api/models/auth/request/forgot_password_request_mode
 import 'package:service_man/api/models/auth/request/login_request_model.dart';
 import 'package:service_man/api/models/auth/request/verify_otp_request_model.dart';
 import 'package:service_man/api/models/bill/bill_request_model.dart';
-import 'package:service_man/api/models/bookings/reassignment_request_model.dart';
-import 'package:service_man/api/models/bookings/update_status_request_model.dart';
+import 'package:service_man/api/models/bookings/request/reassignment_request_model.dart';
+import 'package:service_man/api/models/bookings/request/update_status_request_model.dart';
 import 'package:service_man/api/models/response_model.dart';
 
 part 'client.g.dart';

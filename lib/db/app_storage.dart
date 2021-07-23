@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:service_man/api/models/auth/response/login_response_model.dart';
 
 enum TokenType { ACCESS }
 
@@ -16,6 +19,19 @@ class AppStorage {
       });
     }
     return;
+  }
+
+  Future<void> persistUser(LoginResponseModel loginResponseModel) async {
+    await _storage.write(key: 'technician', value: json.encode(loginResponseModel.toJson()));
+  }
+
+  Future<LoginResponseModel> getUser() async {
+    LoginResponseModel loginResponseModel;
+    String value = await _storage.read(key: 'technician');
+    if (value != null) {
+      loginResponseModel = json.decode(value);
+    }
+    return loginResponseModel;
   }
 
   Future<String> getToken(TokenType type) async {

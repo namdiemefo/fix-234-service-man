@@ -45,7 +45,7 @@ class __LoginScreenState extends State<_LoginScreen> {
        }
 
        if (state is OnSuccess) {
-         AppUtils.showSuccessFlushBar(context, 'success');
+         Navigator.pushNamedAndRemoveUntil(context, 'navigation/home', (route) => false);
        }
 
        if (state is OnLoading) {
