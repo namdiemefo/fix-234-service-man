@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:service_man/db/app_storage.dart';
 import 'package:service_man/helpers/assets/colors.dart';
 import 'package:service_man/helpers/assets/images.dart';
+import 'package:service_man/helpers/assets/routes.dart';
+import 'package:service_man/helpers/assets/strings.dart';
+import 'package:service_man/helpers/di/service_locator.dart';
 import 'package:service_man/helpers/reusable_screens/app_button.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';
 
@@ -11,6 +15,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
+  final AppStorage _appStorage = locator<AppStorage>();
 
   TextEditingController nameController = TextEditingController();
   TextEditingController idController = TextEditingController();
@@ -24,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: bMilk,
         elevation: 0.0,
         title: Text(
-          'Profile',
+          AppStrings.profile,
           style: AppUtils.adaptableTextStyle(size: 14.0, fontWeight: FontWeight.bold, color: bBlack),
         ),
       ),
@@ -51,8 +57,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Expanded(
                     child: TextFormField(
                         controller: nameController,
+                        enabled: false,
                         decoration: InputDecoration(
-                          labelText: 'Full Name',
+                          labelText: AppStrings.fullName,
                           labelStyle: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.w400),
                         )
                     )
@@ -66,7 +73,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: TextFormField(
                         controller: idController,
                         decoration: InputDecoration(
-                          labelText: 'ID',
+                          labelText: AppStrings.id,
+                          enabled: false,
                           labelStyle: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.w400),
                         )
                     )
@@ -80,7 +88,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: TextFormField(
                         controller: phoneController,
                         decoration: InputDecoration(
-                          labelText: 'Phone Number',
+                          labelText: AppStrings.phoneNumber,
+                          enabled: false,
                           labelStyle: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.w400),
                         )
                     )
@@ -92,13 +101,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Expanded(
                     child: AppButton(
-                      buttonText: 'Log out',
+                      buttonText: AppStrings.logOut,
                       height: 55.0,
                       enabledColor: bWhite,
                       enabled: true,
                       textColor: bFadedGrey,
-                      voidCallback: () {
-
+                      voidCallback: () async {
+                       await _appStorage.clear();
+                       Navigator.pushNamedAndRemoveUntil(context, AppRoutes.toLoginScreen, (route) => false);
                       },
                     )
                 )

@@ -5,9 +5,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:service_man/core/global/bloc/global_event.dart';
 import 'package:service_man/core/global/provider/global_provider.dart';
+import 'package:service_man/helpers/assets/routes.dart';
 import 'package:service_man/helpers/di/service_locator.dart';
+import 'package:service_man/pages/bill/category_screen.dart';
 import 'package:service_man/pages/bill/equipment_screen.dart';
-import 'package:service_man/pages/details/details_screen.dart';
+import 'package:service_man/pages/bill/parts_screen.dart';
+import 'package:service_man/pages/bill/preview_screen.dart';
+import 'package:service_man/pages/bill/service_charge_screen.dart';
+import 'package:service_man/pages/bill/success_screen.dart';
+import 'package:service_man/pages/booking/details_screen.dart';
+import 'package:service_man/pages/booking/summary_screen.dart';
 import 'package:service_man/pages/home/home_screen.dart';
 import 'package:service_man/pages/splash/splash_screen.dart';
 
@@ -15,8 +22,9 @@ import 'core/global/bloc/global_bloc.dart';
 import 'pages/auth/login_screen.dart';
 
 void main() {
-  setUpLocator();
+
   WidgetsFlutterBinding.ensureInitialized();
+  setUpLocator();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp
   ]);
@@ -42,7 +50,7 @@ class ServiceManApp extends StatelessWidget {
         designSize: Size(375, 812),
         builder: () =>
             MaterialApp(
-              title: 'Flutter Demo',
+              title: 'Service Man',
               initialRoute: '/',
               onGenerateRoute: _getRoutes,
               theme: ThemeData(
@@ -124,12 +132,12 @@ class NavigationPageState extends State<NavigationPage>
       listener: (context, state) {
         if (state is NotSignedIn) {
           // navigate to login page
-          NavigationPage.navKey.currentState.pushNamedAndRemoveUntil('navigation/login', (route) => false);
+          NavigationPage.navKey.currentState.pushNamedAndRemoveUntil(AppRoutes.toLoginScreen, (route) => false);
         }
 
         if (state is SignedIn) {
           // navigate to home page
-          NavigationPage.navKey.currentState.pushNamedAndRemoveUntil('navigation/home', (route) => false);
+          NavigationPage.navKey.currentState.pushNamedAndRemoveUntil(AppRoutes.toHomeScreen, (route) => false);
         }
 
       },
@@ -154,20 +162,44 @@ class NavigationPageState extends State<NavigationPage>
         builder = _Splash();
         break;
 
-      case 'navigation/login':
+      case AppRoutes.toLoginScreen:
         builder = LoginScreen();
         break;
 
-      case 'navigation/home':
+      case AppRoutes.toHomeScreen:
         builder = HomeScreen();
         break;
 
-      case 'navigator/details':
+      case AppRoutes.toDetailScreen:
         builder = DetailScreen();
         break;
 
-      case 'navigation/equipment':
+      case AppRoutes.toSummaryScreen:
+        builder = SummaryScreen();
+        break;
+
+      case AppRoutes.toEquipmentScreen:
         builder = EquipmentScreen();
+        break;
+
+      case AppRoutes.toBillCategoryScreen:
+        builder = CategoryScreen();
+        break;
+
+      case AppRoutes.toBillPartsScreen:
+        builder = PartsScreen();
+        break;
+
+      case AppRoutes.toBillServiceScreen:
+        builder = ServiceChargeScreen();
+        break;
+
+      case AppRoutes.toBillPreviewScreen:
+        builder = PreviewScreen();
+        break;
+
+      case AppRoutes.toBillSuccessScreen:
+        builder = SuccessScreen();
         break;
 
       default:

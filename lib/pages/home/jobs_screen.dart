@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:service_man/helpers/assets/colors.dart';
 import 'package:service_man/helpers/assets/images.dart';
+import 'package:service_man/helpers/assets/routes.dart';
+import 'package:service_man/helpers/assets/strings.dart';
 import 'package:service_man/helpers/reusable_screens/shadow_icon.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';
 
@@ -47,7 +49,7 @@ class _JobScreenState extends State<JobScreen> {
             AppUtils.verticalSpacing(height: 30.0),
 
             Text(
-              'Pending jobs',
+              AppStrings.pendingJobs,
               style: AppUtils.adaptableTextStyle(size: 15.0, fontWeight: FontWeight.bold, color: bMilk),
             ),
 
@@ -111,7 +113,7 @@ class _JobScreenState extends State<JobScreen> {
                                             mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Order ID: 12345',
+                                                '${AppStrings.orderId}: 12345',
                                                 style: AppUtils.adaptableTextStyle(size: 18.0, fontWeight: FontWeight.normal, color: bBlack),
                                               ),
 
@@ -119,10 +121,10 @@ class _JobScreenState extends State<JobScreen> {
 
                                               OutlineButton(
                                                   onPressed: () {
-                                                    Navigator.pushNamed(context, 'navigator/details');
+                                                    Navigator.pushNamed(context, AppRoutes.toDetailScreen);
                                                   },
                                                   child: Text(
-                                                    'View Details',
+                                                    AppStrings.viewDetails,
                                                     style: AppUtils.adaptableTextStyle(size: 12.0, fontWeight: FontWeight.normal, color: bBlack),
                                                   )
                                               )

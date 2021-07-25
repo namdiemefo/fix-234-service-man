@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:service_man/helpers/assets/colors.dart';
+import 'package:service_man/helpers/assets/routes.dart';
+import 'package:service_man/helpers/assets/strings.dart';
 import 'package:service_man/helpers/reusable_screens/app_button.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';
 
@@ -20,7 +22,7 @@ class _DetailScreenState extends State<DetailScreen> {
         backgroundColor: bMilk,
         elevation: 0.0,
         title: Text(
-          'Request Details',
+          AppStrings.requestDetails,
           style: AppUtils.adaptableTextStyle(size: 14.0, fontWeight: FontWeight.bold, color: bBlack),
         ),
       ),
@@ -50,7 +52,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Service',
+                                      AppStrings.service,
                                       style: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.normal),
                                     ),
                                     AppUtils.verticalSpacing(height: 3.0),
@@ -65,7 +67,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Order ID',
+                                      AppStrings.orderId,
                                       style: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.normal),
                                     ),
                                     AppUtils.verticalSpacing(height: 3.0),
@@ -98,7 +100,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Date Ordered',
+                                      AppStrings.dateOrdered,
                                       style: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.normal),
                                     ),
                                     AppUtils.verticalSpacing(height: 3.0),
@@ -113,7 +115,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Text(
-                                      'Time',
+                                      AppStrings.time,
                                       style: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.normal),
                                     ),
                                     AppUtils.verticalSpacing(height: 3.0),
@@ -146,7 +148,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Frequency',
+                                      AppStrings.frequency,
                                       style: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.normal),
                                     ),
                                     AppUtils.verticalSpacing(height: 3.0),
@@ -161,7 +163,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Text(
-                                      'Number of Equipment',
+                                      AppStrings.numberOfEquipment,
                                       style: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.normal),
                                     ),
                                     AppUtils.verticalSpacing(height: 3.0),
@@ -192,7 +194,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      'Service Description',
+                      AppStrings.serviceDescription,
                       style: AppUtils.adaptableTextStyle(size: 10.0, fontWeight: FontWeight.normal, color: bDark),
                     ),
                     AppUtils.verticalSpacing(height: 13.0),
@@ -225,7 +227,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Customer Info',
+                      AppStrings.customerInfo,
                       style: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.w400),
 
                     ),
@@ -271,7 +273,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         Expanded(
                             child: AppButton(
                               enabled: true,
-                              buttonText: 'Call Client',
+                              buttonText: AppStrings.callClient,
                               height: 50.0,
                               enabledColor: bPurple,
                               voidCallback: () {
@@ -290,10 +292,10 @@ class _DetailScreenState extends State<DetailScreen> {
                   Expanded(
                       child: AppButton(
                         enabled: true,
-                        buttonText: 'Create Bill',
+                        buttonText: AppStrings.createBill,
                         enabledColor: bYellow,
                         voidCallback: () {
-                          Navigator.pushNamed(context, 'navigation/equipment');
+                          Navigator.pushNamed(context, AppRoutes.toEquipmentScreen);
                         },
                       )
                   )
@@ -305,10 +307,10 @@ class _DetailScreenState extends State<DetailScreen> {
                   Expanded(
                       child: AppButton(
                         enabled: true,
-                        buttonText: 'Complete Job',
+                        buttonText: AppStrings.completeJob,
                         enabledColor: bGreen,
                         voidCallback: () {
-
+                          Navigator.pushNamed(context, AppRoutes.toSummaryScreen);
                         },
                       )
                   )

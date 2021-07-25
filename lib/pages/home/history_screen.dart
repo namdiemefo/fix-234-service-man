@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:service_man/helpers/assets/colors.dart';
 import 'package:service_man/helpers/assets/images.dart';
+import 'package:service_man/helpers/assets/strings.dart';
 import 'package:service_man/helpers/reusable_screens/shadow_icon.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';
 
@@ -18,7 +19,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
         backgroundColor: bMilk,
         elevation: 0.0,
         title: Text(
-          'Order History',
+          AppStrings.orderHistory,
           style: AppUtils.adaptableTextStyle(size: 14.0, fontWeight: FontWeight.bold, color: bBlack),
         ),
       ),

@@ -31,6 +31,7 @@ dependencies:
   flutter_spinkit: ^3.1.0
   flutter_svg: ^0.21.0
   flutter_slidable: ^0.5.7
+  material_floating_search_bar: ^0.2.6
   json_annotation: any
   cached_network_image: ^2.5.0
   image_picker: ^0.6.6+5

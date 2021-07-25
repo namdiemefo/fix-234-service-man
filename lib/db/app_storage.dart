@@ -41,4 +41,8 @@ class AppStorage {
     return '';
   }
 
+  Future<void> clear() async {
+    _storage.deleteAll();
+  }
+
 }

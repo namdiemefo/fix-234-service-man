@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:service_man/helpers/assets/colors.dart';
+import 'package:service_man/helpers/assets/routes.dart';
+import 'package:service_man/helpers/assets/strings.dart';
 import 'package:service_man/helpers/reusable_screens/app_button.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';
 
@@ -59,7 +61,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
                                         border: OutlineInputBorder(
                                             borderSide: BorderSide(color: lightGrey)
                                         ),
-                                      hintText: 'Equipment Name',
+                                      hintText: AppStrings.equipmentName,
                                       hintStyle: AppUtils.adaptableTextStyle(size: 13.0, color: bWhite, fontWeight: FontWeight.normal)
                                     ),
                                   )
@@ -83,7 +85,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
                                       border: OutlineInputBorder(
                                           borderSide: BorderSide(color: lightGrey)
                                       ),
-                                      hintText: 'Select Capacity',
+                                      hintText: AppStrings.selectCapacity,
                                       hintStyle: AppUtils.adaptableTextStyle(size: 13.0, color: bDark, fontWeight: FontWeight.normal)
                                   ),
                                 )
@@ -100,10 +102,10 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
                             child: AppButton(
                               height: 55.0,
                               enabled: true,
-                              buttonText: 'Add Equipment',
+                              buttonText: AppStrings.addEquipment,
                               enabledColor: bYellow,
                               voidCallback: () {
-                                // Navigator.pushNamed(context, 'navigation/equipment');
+                                Navigator.pushNamed(context, AppRoutes.toBillCategoryScreen);
                               },
                             )
                         )
@@ -128,7 +130,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
         backgroundColor: bMilk,
         elevation: 0.0,
         title: Text(
-          'Equipment Serviced',
+          AppStrings.equipmentServiced,
           style: AppUtils.adaptableTextStyle(size: 14.0, fontWeight: FontWeight.bold, color: bBlack),
         ),
         actions: [
@@ -213,7 +215,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
                   children: [
                     Expanded(
                         child: Text(
-                          'Add equipment serviced or worked on to create bill',
+                          AppStrings.noEquipmentText,
                           style: AppUtils.adaptableTextStyle(size: 18.0, color: bHintColor, fontWeight: FontWeight.normal),
                           textAlign: TextAlign.center,
                         )
@@ -228,11 +230,11 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
                 Expanded(
                     child: AppButton(
                       voidCallback: () {
-
+                        Navigator.pushNamed(context, AppRoutes.toBillPreviewScreen);
                       },
                       enabledColor: bPurple,
                       enabled: true,
-                      buttonText: 'Preview Bill',
+                      buttonText: AppStrings.previewBill,
                     )
                 )
               ],

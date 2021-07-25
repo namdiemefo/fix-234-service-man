@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:service_man/core/login/login_bloc.dart';
 import 'package:service_man/helpers/assets/colors.dart';
+import 'package:service_man/helpers/assets/routes.dart';
+import 'package:service_man/helpers/assets/strings.dart';
 import 'package:service_man/helpers/reusable_screens/app_button.dart';
 import 'package:service_man/helpers/reusable_screens/app_loader.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';
@@ -45,7 +47,7 @@ class __LoginScreenState extends State<_LoginScreen> {
        }
 
        if (state is OnSuccess) {
-         Navigator.pushNamedAndRemoveUntil(context, 'navigation/home', (route) => false);
+         Navigator.pushNamedAndRemoveUntil(context, AppRoutes.toHomeScreen, (route) => false);
        }
 
        if (state is OnLoading) {
@@ -70,13 +72,13 @@ class __LoginScreenState extends State<_LoginScreen> {
               Padding(
                   padding: EdgeInsets.only(top: 150.0),
                   child: Text(
-                    'Welcome to',
+                    AppStrings.welcomeTo,
                     style: AppUtils.adaptableTextStyle(size: 14.0, color: bPurple, fontWeight: FontWeight.bold),
                   ),
               ),
               AppUtils.verticalSpacing(height: 3.0),
               Text(
-                'Smooth Repairs',
+                AppStrings.fix234,
                 style: AppUtils.adaptableTextStyle(size: 35.0, color: bPurple, fontWeight: FontWeight.bold),
               ),
               AppUtils.verticalSpacing(height: 10.0),
@@ -92,7 +94,7 @@ class __LoginScreenState extends State<_LoginScreen> {
                               child: TextFormField(
                                   validator: (value) {
                                     if (value.isEmpty) {
-                                      return 'Enter valid ID';
+                                      return AppStrings.idError;
                                     }
                                     return null;
                                   },
@@ -100,8 +102,8 @@ class __LoginScreenState extends State<_LoginScreen> {
                                   _id = value.trim();
                                 },
                                 decoration: InputDecoration(
-                                  hintText: 'Fix-234 Valid ID',
-                                  helperText: 'FX-1234',
+                                  hintText: AppStrings.idHint,
+                                  helperText: AppStrings.idHelperText,
                                   hintStyle: AppUtils.adaptableTextStyle(size: 14.0, color: bHintColor, fontWeight: FontWeight.w400),
                                 ),
                               )
@@ -117,7 +119,7 @@ class __LoginScreenState extends State<_LoginScreen> {
                               child: TextFormField(
                                 validator: (value) {
                                   if (value.isEmpty) {
-                                    return 'Enter valid password';
+                                    return AppStrings.passwordError;
                                   }
                                   return null;
                                 },
@@ -125,7 +127,7 @@ class __LoginScreenState extends State<_LoginScreen> {
                                   _password = value.trim();
                                 },
                                 decoration: InputDecoration(
-                                  hintText: 'Password',
+                                  hintText: AppStrings.passwordHint,
                                   hintStyle: AppUtils.adaptableTextStyle(size: 14.0, color: bHintColor, fontWeight: FontWeight.w400),
                                 ),
                               )
@@ -144,7 +146,7 @@ class __LoginScreenState extends State<_LoginScreen> {
                       child: AppButton(
                         enabled: true,
                         enabledColor: bPurple,
-                        buttonText: 'Log in',
+                        buttonText: AppStrings.logIn,
                         voidCallback: () {
                           if (_formKey.currentState.validate()) {
                             _formKey.currentState.save();
@@ -171,7 +173,7 @@ class __LoginScreenState extends State<_LoginScreen> {
                           padding: MaterialStateProperty.all(EdgeInsets.zero),
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap
                       ),
-                      child: Text('Forgot Password?', style: TextStyle(fontSize: 12.0 ,color: bPurple) )
+                      child: Text(AppStrings.forgotPassword, style: TextStyle(fontSize: 12.0 ,color: bPurple) )
                   )
                 ],
               )
