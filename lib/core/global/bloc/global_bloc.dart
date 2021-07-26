@@ -38,4 +38,5 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
 
 
   }
+
 }

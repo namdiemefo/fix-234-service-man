@@ -1,0 +1,56 @@
+class AppStrings {
+
+  static const fontFamily = 'Neue Haas Grotesk';
+  static const bearerToken = 'Bearer';
+  static const sendBill = 'Send Bill';
+  static const serviceBill = 'Service Bill';
+  static const createBill = 'Create Bill';
+  static const previewBill = 'Preview Bill';
+  static const home = 'Home';
+  static const completeJob = 'Complete Job';
+  static const callClient = 'Call Client';
+  static const billCategory = 'Bill Category';
+  static const profile = 'Profile';
+  static const fullName = 'Full Name';
+  static const id = 'ID';
+  static const dateOrdered = 'Date Ordered';
+  static const time = 'time';
+  static const service = 'Service';
+  static const frequency = 'Frequency';
+  static const numberOfEquipment = 'Number of Equipments';
+  static const orderId = 'Order ID';
+  static const serviceDescription = 'serviceDescription';
+  static const customerInfo = 'Customer Info';
+  static const pendingJobs = 'Pending Jobs';
+  static const phoneNumber = 'Phone Number';
+  static const addEquipment = 'Add Equipment';
+  static const equipmentServiced = 'Equipment Serviced';
+  static const selectCapacity = 'Select Capacity';
+  static const equipmentName = 'Equipment Name';
+  static const noEquipmentText = 'Add equipment serviced or worked on to create bill';
+  static const logOut = 'Log out';
+  static const chargeHint = 'Search by service charge name';
+  static const partsHint = 'Search by part name';
+  static const requestDetails = 'Request Details';
+  static const parts = 'Parts';
+  static const serviceChargeList = 'Service Charge List';
+  static const partsList = 'Parts List';
+  static const logIn = 'Log in';
+  static const fix234 = 'Fix 234';
+  static const passwordHint = 'Password';
+  static const passwordError = 'Enter Password';
+  static const idError = 'Enter valid ID';
+  static const idHelperText = 'FIX-1234';
+  static const forgotPassword = 'Forgot Password?';
+  static const idHint = 'Fix-234 Valid ID';
+  static const welcomeTo = 'Welcome to';
+  static const orderHistory = 'Order History';
+  static const viewDetails = 'View Details';
+  static const serviceCharge = 'Service Charge';
+  static const total = 'Total:';
+  static const submit = 'Submit';
+  static const summaryTest = 'Give a summary report of the job';
+  static const success_bill_text = 'Service bill has been sent to client. Ensure payment confirmation before working on the job';
+  static const billCategoryHint = 'Select service bill category';
+
+}
