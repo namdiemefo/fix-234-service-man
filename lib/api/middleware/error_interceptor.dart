@@ -31,10 +31,11 @@ class ErrorInterceptor extends Interceptor {
       case DioErrorType.other:
         errorMessage = HttpErrorStrings.BAD_RESPONSE;
         if (err.response == null) {
+          print('in here');
           err.response = Response(
-              requestOptions: RequestOptions(
-                path: ''
-              ),
+              // requestOptions: RequestOptions(
+              //   path: ''
+              // ),
               data: errorMessage
           );
           handler.next(err);

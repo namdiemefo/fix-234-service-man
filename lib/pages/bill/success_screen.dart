@@ -21,7 +21,7 @@ class SuccessScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset(Images.bill)
+                    Image.asset(Images.bill)
                   ],
                 ),
             ),

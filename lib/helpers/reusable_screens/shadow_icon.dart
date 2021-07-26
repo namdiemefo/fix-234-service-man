@@ -29,7 +29,7 @@ class AdaptableShadowIcon extends StatelessWidget {
             shape: BoxShape.circle,
             boxShadow: [BoxShadow(color: boxShadow, spreadRadius: radius)]
         ),
-        child: SvgPicture.asset(iconUrl, height: imageHeight, width: imageWidth),
+        child: Image.asset(iconUrl, height: imageHeight, width: imageWidth),
       ),
     );
   }

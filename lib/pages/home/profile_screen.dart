@@ -47,7 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 70.0),
-                  child: SvgPicture.asset(Images.camera, height: 15.0, width: 15.0,),
+                  child: Image.asset(Images.camera, height: 15.0, width: 15.0,),
                 )
               ],
             ),

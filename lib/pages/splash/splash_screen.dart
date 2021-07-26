@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget {
       backgroundColor: bYellow,
       body: Container(
         child: Center(
-          child: SvgPicture.asset(Images.logo),
+          child: Image.asset(Images.logo),
         ),
       ),
     );
