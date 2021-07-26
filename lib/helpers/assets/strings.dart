@@ -1,5 +1,6 @@
 class AppStrings {
 
+  static const fontFamily = 'Neue Haas Grotesk';
   static const bearerToken = 'Bearer';
   static const sendBill = 'Send Bill';
   static const serviceBill = 'Service Bill';

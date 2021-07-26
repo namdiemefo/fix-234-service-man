@@ -20,7 +20,7 @@ class GlobalProvider extends ChangeNotifier {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     bool status = preferences.getBool('sign_in_status');
     String token = await _appStorage.getToken(TokenType.ACCESS);
-    if (token.length > 3) {
+    if (token != null) {
       signInStatus = true;
     }
     return;

@@ -15,23 +15,26 @@ class ErrorInterceptor extends Interceptor {
     String errorMessage;
     switch (err.type) {
       case DioErrorType.connectTimeout:
-        errorMessage = 'Connection Timed out';
+        errorMessage = HttpErrorStrings.CONNECTION_TIMEOUT_ACTIVE;
         break;
       case DioErrorType.sendTimeout:
-        errorMessage = 'Network Timed out';
+        errorMessage = HttpErrorStrings.SEND_TIMEOUT;
         break;
       case DioErrorType.receiveTimeout:
-        errorMessage = 'Server Timed out';
+        errorMessage = HttpErrorStrings.RECEIVE_TIMEOUT;
         break;
       case DioErrorType.response:
-        errorMessage = 'Error from server';
+        errorMessage = HttpErrorStrings.BAD_RESPONSE;
         break;
       case DioErrorType.cancel:
         break;
       case DioErrorType.other:
-        errorMessage = 'Failed to connect to the internet';
+        errorMessage = HttpErrorStrings.BAD_RESPONSE;
         if (err.response == null) {
           err.response = Response(
+              requestOptions: RequestOptions(
+                path: ''
+              ),
               data: errorMessage
           );
           handler.next(err);

@@ -2,13 +2,14 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:service_man/helpers/assets/colors.dart';
+import 'package:service_man/helpers/assets/strings.dart';
 
 class AppUtils {
 
   static TextStyle adaptableTextStyle(
       {double size, FontWeight fontWeight, Color color}) {
     return TextStyle(
-        // fontFamily: BloommAssets.sf_ui,
+        fontFamily: AppStrings.fontFamily,
         fontWeight: fontWeight,
         fontStyle: FontStyle.normal,
         fontSize: size,
@@ -43,11 +44,14 @@ class AppUtils {
       messageText: Row(
         children: [
           // SvgPicture.asset(smile_svg, color: bWhite),
-          SizedBox(width: 20.0),
-          Text(
-            message,
-            // style: BloommAssets.adaptableTextStyle(
-            //     size: 12, fontWeight: FontWeight.w400, color: bWhite),
+          SizedBox(width: 5.0),
+          Expanded(
+            child: Text(
+              message,
+              style: adaptableTextStyle(size: 10.0, color: bWhite, fontWeight: FontWeight.normal),
+              // style: BloommAssets.adaptableTextStyle(
+              //     size: 12, fontWeight: FontWeight.w400, color: bWhite),
+            ),
           ),
         ],
       ),
@@ -63,11 +67,14 @@ class AppUtils {
       messageText: Row(
         children: [
           // SvgPicture.asset(sad_svg),
-          SizedBox(width: 20.0),
-          Text(
-            error,
-            // style: BloommAssets.adaptableTextStyle(
-            //     size: 12, fontWeight: FontWeight.w400, color: bBadge),
+          SizedBox(width: 5.0),
+          Expanded(
+            child: Text(
+              error,
+              style: adaptableTextStyle(size: 10.0, color: bWhite, fontWeight: FontWeight.normal),
+              // style: BloommAssets.adaptableTextStyle(
+              //     size: 12, fontWeight: FontWeight.w400, color: bBadge),
+            ),
           ),
         ],
       ),

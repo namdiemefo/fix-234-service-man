@@ -30,7 +30,7 @@ class AuthRepository extends AuthInterface {
         requestHeader: true
       ),
       ErrorInterceptor(),
-      ClientServerErrorInterceptor()
+      // ClientServerErrorInterceptor()
     ]);
     return dio;
   }

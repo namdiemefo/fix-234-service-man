@@ -12,7 +12,7 @@ class HttpErrorStrings {
       'Unable to connect to server at the moment';
 
   static const String BAD_RESPONSE =
-      'Unable to complete request at the moment. Please contact our customer care';
+      'Unable to complete request at the moment';
 
   static const String OPERATION_CANCELLED = 'Operation was cancelled';
 

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:service_man/core/global/bloc/global_event.dart';
 import 'package:service_man/core/global/provider/global_provider.dart';
 import 'package:service_man/helpers/assets/routes.dart';
+import 'package:service_man/helpers/assets/strings.dart';
 import 'package:service_man/helpers/di/service_locator.dart';
 import 'package:service_man/pages/bill/category_screen.dart';
 import 'package:service_man/pages/bill/equipment_screen.dart';
@@ -54,6 +55,9 @@ class ServiceManApp extends StatelessWidget {
               initialRoute: '/',
               onGenerateRoute: _getRoutes,
               theme: ThemeData(
+                fontFamily: AppStrings.fontFamily,
+                textTheme: TextTheme(
+                ),
                 // This is the theme of your application.
                 //
                 // Try running your application with "flutter run". You'll see the
