@@ -22,7 +22,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
         backgroundColor: bMilk,
         elevation: 0.0,
         title: Text(
-          AppStrings.requestDetails,
+          AppStrings.summaryReport,
           style: AppUtils.adaptableTextStyle(size: 14.0, fontWeight: FontWeight.bold, color: bBlack),
         ),
       ),

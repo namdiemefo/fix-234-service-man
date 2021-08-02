@@ -32,6 +32,7 @@ class AppStrings {
   static const chargeHint = 'Search by service charge name';
   static const partsHint = 'Search by part name';
   static const requestDetails = 'Request Details';
+  static const summaryReport = 'Summary Report';
   static const parts = 'Parts';
   static const serviceChargeList = 'Service Charge List';
   static const partsList = 'Parts List';

@@ -18,10 +18,9 @@ class _PartsScreenState extends State<PartsScreen> {
     final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     return Scaffold(
       appBar: AppBar(
-        // iconTheme: IconThemeData(
-        //     color: bDark
-        // ),
-        automaticallyImplyLeading: false,
+        iconTheme: IconThemeData(
+            color: bDark
+        ),
         centerTitle: true,
         backgroundColor: bMilk,
         elevation: 0.0,
@@ -37,6 +36,8 @@ class _PartsScreenState extends State<PartsScreen> {
             fit: StackFit.expand,
             children: [
               FloatingSearchBar(
+                  leadingActions: null,
+                  automaticallyImplyBackButton: false,
                   body: FloatingSearchBarScrollNotifier(
                     child: Container(
                         padding: EdgeInsets.fromLTRB(0.0, 60.0, 0.0, 0.0),
