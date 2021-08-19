@@ -8,6 +8,7 @@ enum TokenType { ACCESS }
 class AppStorage {
   final _storage = FlutterSecureStorage();
   String _keys = 'access';
+  static const String _technicianKey = 'technician';
 
 
   Future<void> persistToken(Map<TokenType, String> token) async {
@@ -22,14 +23,16 @@ class AppStorage {
   }
 
   Future<void> persistUser(LoginResponseModel loginResponseModel) async {
-    await _storage.write(key: 'technician', value: json.encode(loginResponseModel.toJson()));
+    await _storage.write(key: _technicianKey, value: json.encode(loginResponseModel.toJson()));
   }
 
   Future<LoginResponseModel> getUser() async {
     LoginResponseModel loginResponseModel;
-    String value = await _storage.read(key: 'technician');
+    String value = await _storage.read(key: _technicianKey);
+    print('value: $value');
     if (value != null) {
-      loginResponseModel = json.decode(value);
+      var model = json.decode(value);
+      loginResponseModel = LoginResponseModel.fromJson(model);
     }
     return loginResponseModel;
   }

@@ -20,10 +20,12 @@ import 'package:service_man/pages/home/home_screen.dart';
 import 'package:service_man/pages/splash/splash_screen.dart';
 
 import 'core/global/bloc/global_bloc.dart';
+import 'main_bloc_observer.dart';
 import 'pages/auth/login_screen.dart';
 
 void main() {
 
+  Bloc.observer = MainBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   setUpLocator();
   SystemChrome.setPreferredOrientations([
@@ -175,7 +177,8 @@ class NavigationPageState extends State<NavigationPage>
         break;
 
       case AppRoutes.toDetailScreen:
-        builder = DetailScreen();
+        DetailScreenArgument args = settings.arguments;
+        builder = DetailScreen(getBookingResponse: args.getBookingResponse);
         break;
 
       case AppRoutes.toSummaryScreen:

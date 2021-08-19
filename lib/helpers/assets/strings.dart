@@ -14,12 +14,12 @@ class AppStrings {
   static const fullName = 'Full Name';
   static const id = 'ID';
   static const dateOrdered = 'Date Ordered';
-  static const time = 'time';
+  static const time = 'Time';
   static const service = 'Service';
   static const frequency = 'Frequency';
   static const numberOfEquipment = 'Number of Equipments';
   static const orderId = 'Order ID';
-  static const serviceDescription = 'serviceDescription';
+  static const serviceDescription = 'Service Description';
   static const customerInfo = 'Customer Info';
   static const pendingJobs = 'Pending Jobs';
   static const phoneNumber = 'Phone Number';

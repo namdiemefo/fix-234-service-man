@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:service_man/api/models/bookings/response/get_booking_response.dart';
 import 'package:service_man/helpers/assets/colors.dart';
 import 'package:service_man/helpers/assets/routes.dart';
 import 'package:service_man/helpers/assets/strings.dart';
 import 'package:service_man/helpers/reusable_screens/app_button.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailScreen extends StatefulWidget {
+  final GetBookingResponse getBookingResponse;
+
+  const DetailScreen({Key key, this.getBookingResponse}) : super(key: key);
   @override
   _DetailScreenState createState() => _DetailScreenState();
 }
@@ -57,7 +62,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     ),
                                     AppUtils.verticalSpacing(height: 3.0),
                                     Text(
-                                      'Service',
+                                      widget.getBookingResponse.name,
                                       style: AppUtils.adaptableTextStyle(size: 13.0, color: bDark, fontWeight: FontWeight.bold),
                                     )
                                   ],
@@ -72,7 +77,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     ),
                                     AppUtils.verticalSpacing(height: 3.0),
                                     Text(
-                                      '47364',
+                                      widget.getBookingResponse.bookingId,
                                       style: AppUtils.adaptableTextStyle(size: 13.0, color: bDark, fontWeight: FontWeight.bold),
                                     )
                                   ],
@@ -105,7 +110,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     ),
                                     AppUtils.verticalSpacing(height: 3.0),
                                     Text(
-                                      'Service',
+                                      AppUtils.convertDate('${widget.getBookingResponse.createdAt}'),
                                       style: AppUtils.adaptableTextStyle(size: 13.0, color: bDark, fontWeight: FontWeight.bold),
                                     )
                                   ],
@@ -120,7 +125,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     ),
                                     AppUtils.verticalSpacing(height: 3.0),
                                     Text(
-                                      '47364',
+                                      widget.getBookingResponse.time,
                                       style: AppUtils.adaptableTextStyle(size: 13.0, color: bDark, fontWeight: FontWeight.bold),
                                     )
                                   ],
@@ -153,7 +158,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     ),
                                     AppUtils.verticalSpacing(height: 3.0),
                                     Text(
-                                      'Service',
+                                      widget.getBookingResponse.frequency,
                                       style: AppUtils.adaptableTextStyle(size: 13.0, color: bDark, fontWeight: FontWeight.bold),
                                     )
                                   ],
@@ -168,7 +173,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     ),
                                     AppUtils.verticalSpacing(height: 3.0),
                                     Text(
-                                      '47364',
+                                      '',
                                       style: AppUtils.adaptableTextStyle(size: 13.0, color: bDark, fontWeight: FontWeight.bold),
                                       textAlign: TextAlign.center,
                                     )
@@ -205,7 +210,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             child: Row(
                               children: [
                                 Text(
-                                  'A.C not cooling',
+                                  widget.getBookingResponse.description,
                                   style: AppUtils.adaptableTextStyle(size: 13.0, fontWeight: FontWeight.normal, color: bDark),
                                 )
                               ],
@@ -243,12 +248,12 @@ class _DetailScreenState extends State<DetailScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Tunde Gabriel',
+                              widget.getBookingResponse.user,
                               style: AppUtils.adaptableTextStyle(size: 13.0, fontWeight: FontWeight.bold, color: bBlack),
                             ),
                             AppUtils.verticalSpacing(height: 5.0),
                             Text(
-                              'Generator Technician',
+                              '${widget.getBookingResponse.location}',
                               style: AppUtils.adaptableTextStyle(size: 12.0, fontWeight: FontWeight.normal, color: bHintColor),
                             )
                             // Row(
@@ -277,7 +282,8 @@ class _DetailScreenState extends State<DetailScreen> {
                               height: 50.0,
                               enabledColor: bPurple,
                               voidCallback: () {
-
+                                // _callNumber(widget.getBookingResponse.userPhone);
+                                _callNumber('09080773642');
                               },
                             )
                         )
@@ -322,4 +328,19 @@ class _DetailScreenState extends State<DetailScreen> {
       ),
     );
   }
+
+  void _callNumber(String phoneNumber) async {
+    String url = 'tel:' + phoneNumber;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+}
+
+class DetailScreenArgument {
+  final GetBookingResponse getBookingResponse;
+
+  DetailScreenArgument(this.getBookingResponse);
 }

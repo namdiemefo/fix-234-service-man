@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:service_man/api/models/auth/response/login_response_model.dart';
 import 'package:service_man/db/app_storage.dart';
 import 'package:service_man/helpers/assets/colors.dart';
 import 'package:service_man/helpers/assets/images.dart';
@@ -21,6 +22,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController idController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  String user, staffId, phone;
+
+  @override
+  void initState() {
+    getUser();
+    super.initState();
+  }
+
+  void getUser() async {
+    LoginResponseModel loginResponseModel = await _appStorage.getUser();
+    user = loginResponseModel.fullName;
+    staffId = loginResponseModel.staffId;
+    phone = loginResponseModel.phone;
+
+    phoneController.text = phone;
+    idController.text = staffId;
+    nameController.text = user;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Expanded(
                     child: TextFormField(
+                        style: AppUtils.adaptableTextStyle(size: 10.0, color: bBlack, fontWeight: FontWeight.w400),
                         controller: nameController,
                         enabled: false,
                         decoration: InputDecoration(
@@ -71,6 +91,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Expanded(
                     child: TextFormField(
+                        style: AppUtils.adaptableTextStyle(size: 10.0, color: bBlack, fontWeight: FontWeight.w400),
                         controller: idController,
                         decoration: InputDecoration(
                           labelText: AppStrings.id,
@@ -86,6 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Expanded(
                     child: TextFormField(
+                        style: AppUtils.adaptableTextStyle(size: 10.0, color: bBlack, fontWeight: FontWeight.w400),
                         controller: phoneController,
                         decoration: InputDecoration(
                           labelText: AppStrings.phoneNumber,

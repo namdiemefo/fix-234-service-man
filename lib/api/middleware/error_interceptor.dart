@@ -55,6 +55,13 @@ class ErrorInterceptor extends Interceptor {
 
     if (err.response != null) {
        err.response.data = errorMessage;
+    } else {
+      err.response = Response(
+        // requestOptions: RequestOptions(
+        //   path: ''
+        // ),
+          data: errorMessage
+      );
     }
 
     handler.next(err);

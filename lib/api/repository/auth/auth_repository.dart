@@ -40,7 +40,7 @@ class AuthRepository extends AuthInterface {
 
     try {
       MyResponseModel myResponseModel = await client.login(loginRequestModel);
-      print('my response code is ${myResponseModel.code}');
+
       if (myResponseModel.code == 200) {
         LoginResponseModel loginResponseModel = LoginResponseModel.fromJson(myResponseModel.data);
         return Tuple2(loginResponseModel, null);
