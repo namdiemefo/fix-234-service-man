@@ -29,7 +29,7 @@ class AppStrings {
   static const equipmentName = 'Equipment Name';
   static const noEquipmentText = 'Add equipment serviced or worked on to create bill';
   static const logOut = 'Log out';
-  static const chargeHint = 'Search by service charge name';
+  static const chargeHint = 'Search by service name';
   static const partsHint = 'Search by part name';
   static const requestDetails = 'Request Details';
   static const summaryReport = 'Summary Report';

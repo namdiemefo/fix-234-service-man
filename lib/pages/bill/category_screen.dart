@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:service_man/api/models/bill/create_bill_model.dart';
 import 'package:service_man/helpers/assets/colors.dart';
 import 'package:service_man/helpers/assets/routes.dart';
 import 'package:service_man/helpers/assets/strings.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';
+import 'package:service_man/pages/bill/parts_screen.dart';
+import 'package:service_man/pages/bill/servicing_screen.dart';
 
 class CategoryScreen extends StatefulWidget {
+  final Equipment equipment;
+
+  const CategoryScreen({Key key, this.equipment}) : super(key: key);
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
 }
@@ -33,7 +39,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           children: [
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, AppRoutes.toBillPartsScreen);
+                Navigator.pushNamed(context, AppRoutes.toBillPartsScreen, arguments: PartsScreenArguments(widget.equipment));
               },
               child: Row(
                 children: [
@@ -67,7 +73,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, AppRoutes.toBillServiceScreen);
+                Navigator.pushNamed(context, AppRoutes.toBillServiceScreen, arguments: ServiceScreenArguments(widget.equipment));
               },
               child: Row(
                 children: [
@@ -101,4 +107,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
       ),
     );
   }
+}
+
+class CategoryScreenArguments {
+  final Equipment equipment;
+
+  CategoryScreenArguments(this.equipment);
 }

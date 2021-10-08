@@ -12,7 +12,7 @@ import 'package:service_man/pages/bill/category_screen.dart';
 import 'package:service_man/pages/bill/equipment_screen.dart';
 import 'package:service_man/pages/bill/parts_screen.dart';
 import 'package:service_man/pages/bill/preview_screen.dart';
-import 'package:service_man/pages/bill/service_charge_screen.dart';
+import 'package:service_man/pages/bill/servicing_screen.dart';
 import 'package:service_man/pages/bill/success_screen.dart';
 import 'package:service_man/pages/booking/details_screen.dart';
 import 'package:service_man/pages/booking/summary_screen.dart';
@@ -53,6 +53,7 @@ class ServiceManApp extends StatelessWidget {
         designSize: Size(375, 812),
         builder: () =>
             MaterialApp(
+              debugShowCheckedModeBanner: false,
               title: 'Service Man',
               initialRoute: '/',
               onGenerateRoute: _getRoutes,
@@ -186,19 +187,23 @@ class NavigationPageState extends State<NavigationPage>
         break;
 
       case AppRoutes.toEquipmentScreen:
-        builder = EquipmentScreen();
+        EquipmentScreenArgument args = settings.arguments;
+        builder = EquipmentScreen(service: args.service);
         break;
 
       case AppRoutes.toBillCategoryScreen:
-        builder = CategoryScreen();
+        CategoryScreenArguments args = settings.arguments;
+        builder = CategoryScreen(equipment: args.equipment);
         break;
 
       case AppRoutes.toBillPartsScreen:
-        builder = PartsScreen();
+        PartsScreenArguments args = settings.arguments;
+        builder = PartsScreen(equipment: args.equipment);
         break;
 
       case AppRoutes.toBillServiceScreen:
-        builder = ServiceChargeScreen();
+        ServiceScreenArguments args = settings.arguments;
+        builder = ServicingScreen(equipment: args.equipment);
         break;
 
       case AppRoutes.toBillPreviewScreen:

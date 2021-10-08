@@ -56,8 +56,17 @@ abstract class Client {
   @GET('technician/booking/bills')
   Future<MyResponseModel> bills(@Header('Authorization') String token);
 
+  @GET('technician/booking/parts')
+  Future<MyResponseModel> parts(@Header('Authorization') String token, @Query("name") String search);
+
+  @GET('technician/booking/servicing')
+  Future<MyResponseModel> servicing(@Header('Authorization') String token, @Query("name") String search);
+
   // @GET('technician/booking/bill/:id')
   // Future<MyResponseModel> oneBill(@Header('Authorization') String token, @Path());
+
+  // PARTS & SERVICE
+  // @GET('')
 
 
 

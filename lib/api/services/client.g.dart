@@ -25,9 +25,7 @@ class _Client implements Client {
         _setStreamType<MyResponseModel>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, 'technician/auth/login',
-                    queryParameters: queryParameters,
-                    data: _data
-            )
+                    queryParameters: queryParameters)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;
@@ -43,9 +41,7 @@ class _Client implements Client {
         _setStreamType<MyResponseModel>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, 'technician/auth/forgot',
-                    queryParameters: queryParameters,
-                data: _data
-            )
+                    queryParameters: queryParameters)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;
@@ -63,9 +59,7 @@ class _Client implements Client {
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(_dio.options, 'technician/auth/change',
-                queryParameters: queryParameters,
-            data: _data
-        )
+                queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;
@@ -83,9 +77,7 @@ class _Client implements Client {
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(_dio.options, 'technician/auth/verify',
-                queryParameters: queryParameters,
-            data: _data
-        )
+                queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;
@@ -106,9 +98,7 @@ class _Client implements Client {
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(_dio.options, 'technician/auth/upload',
-                queryParameters: queryParameters,
-            data: _data
-        )
+                queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;
@@ -160,9 +150,7 @@ class _Client implements Client {
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(_dio.options, 'technician/booking/status',
-                queryParameters: queryParameters,
-            data: _data
-        )
+                queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;
@@ -180,9 +168,7 @@ class _Client implements Client {
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(_dio.options, 'technician/booking/request',
-                queryParameters: queryParameters,
-            data: _data
-        )
+                queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;
@@ -200,8 +186,7 @@ class _Client implements Client {
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(_dio.options, 'technician/booking/bill',
-                queryParameters: queryParameters,
-            data: _data)
+                queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;
@@ -218,6 +203,40 @@ class _Client implements Client {
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
             .compose(_dio.options, 'technician/booking/bills',
+                queryParameters: queryParameters)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = MyResponseModel.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<MyResponseModel> parts(token, search) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'name': search};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MyResponseModel>(Options(
+                method: 'GET',
+                headers: <String, dynamic>{r'Authorization': token},
+                extra: _extra)
+            .compose(_dio.options, 'technician/booking/parts',
+                queryParameters: queryParameters)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = MyResponseModel.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<MyResponseModel> servicing(token, search) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'name': search};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MyResponseModel>(Options(
+                method: 'GET',
+                headers: <String, dynamic>{r'Authorization': token},
+                extra: _extra)
+            .compose(_dio.options, 'technician/booking/servicing',
                 queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:service_man/api/models/bill/create_bill_model.dart';
 import 'package:service_man/helpers/assets/colors.dart';
 import 'package:service_man/helpers/assets/routes.dart';
 import 'package:service_man/helpers/assets/strings.dart';
 import 'package:service_man/helpers/reusable_screens/app_button.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';
+import 'package:service_man/pages/bill/category_screen.dart';
 
 class EquipmentScreen extends StatefulWidget {
+  final String service;
+
+  const EquipmentScreen({Key key, this.service}) : super(key: key);
   @override
   _EquipmentScreenState createState() => _EquipmentScreenState();
 }
@@ -14,6 +19,10 @@ class EquipmentScreen extends StatefulWidget {
 class _EquipmentScreenState extends State<EquipmentScreen> {
 
   bool list = false;
+  List<Equipment> equipment = [];
+  TextEditingController equipmentNameController = TextEditingController();
+  TextEditingController capacityController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   void _displayBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -26,34 +35,70 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
               borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0) ),
               color: bPurple,
             ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Column(
-                  children: [
-                    SizedBox(height: 30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 50.0,
-                          child: Divider(
-                            height: 5.0,
-                            thickness: 2.0,
-                            color: bWhite,
+            child: Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+                child: Column(
+                    children: [
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 50.0,
+                            child: Divider(
+                              height: 5.0,
+                              thickness: 2.0,
+                              color: bWhite,
 
-                          ),
-                        )
-                      ],
-                    ),
-                    AppUtils.verticalSpacing(height: 20.0),
-                    Container(
-                          height: 51.0,
+                            ),
+                          )
+                        ],
+                      ),
+                      AppUtils.verticalSpacing(height: 10.0),
+                      Expanded(
+                        child: Container(
+                              height: 30.0,
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                      child: TextFormField(
+                                        decoration: InputDecoration(
+                                            fillColor: Colors.grey.shade500,
+                                            filled: true,
+                                            enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(color: lightGrey)
+                                            ),
+                                            border: OutlineInputBorder(
+                                                borderSide: BorderSide(color: lightGrey)
+                                            ),
+                                          hintText: AppStrings.equipmentName,
+                                          hintStyle: AppUtils.adaptableTextStyle(size: 13.0, color: bWhite, fontWeight: FontWeight.normal)
+                                        ),
+                                        validator: (String value) {
+                                          if (value.isEmpty) {
+                                            return "Enter an equipment name";
+                                          }
+                                          return null;
+                                        },
+                                        controller: equipmentNameController,
+                                      )
+                                  ),
+                                ],
+                              )
+                            ),
+                      ),
+                      AppUtils.verticalSpacing(height: 2.0),
+                      Expanded(
+                          child: Container(
+                          height: 30.0,
                           child: Row(
                             children: [
                               Expanded(
                                   child: TextFormField(
                                     decoration: InputDecoration(
-                                        fillColor: Colors.grey.shade500,
+                                        fillColor: bWhite,
                                         filled: true,
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(color: lightGrey)
@@ -61,59 +106,49 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
                                         border: OutlineInputBorder(
                                             borderSide: BorderSide(color: lightGrey)
                                         ),
-                                      hintText: AppStrings.equipmentName,
-                                      hintStyle: AppUtils.adaptableTextStyle(size: 13.0, color: bWhite, fontWeight: FontWeight.normal)
+                                        hintText: AppStrings.selectCapacity,
+                                        hintStyle: AppUtils.adaptableTextStyle(size: 13.0, color: bDark, fontWeight: FontWeight.normal)
                                     ),
+                                    validator: (String value) {
+                                      if (value.isEmpty) {
+                                        return "Enter the capacity";
+                                      }
+                                      return null;
+                                    },
+                                    controller: capacityController,
                                   )
                               ),
                             ],
                           )
-                        ),
-                    AppUtils.verticalSpacing(height: 20.0),
-                    Container(
-                        height: 51.0,
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                      fillColor: bWhite,
-                                      filled: true,
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: lightGrey)
-                                      ),
-                                      border: OutlineInputBorder(
-                                          borderSide: BorderSide(color: lightGrey)
-                                      ),
-                                      hintText: AppStrings.selectCapacity,
-                                      hintStyle: AppUtils.adaptableTextStyle(size: 13.0, color: bDark, fontWeight: FontWeight.normal)
-                                  ),
-                                )
-                            ),
-                          ],
-                        )
-                    ),
-                    AppUtils.verticalSpacing(height: 20.0),
+                      )
+                      ),
+                      AppUtils.verticalSpacing(height: 10.0),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Expanded(
-                            child: AppButton(
-                              height: 55.0,
-                              enabled: true,
-                              buttonText: AppStrings.addEquipment,
-                              enabledColor: bYellow,
-                              voidCallback: () {
-                                Navigator.pushNamed(context, AppRoutes.toBillCategoryScreen);
-                              },
-                            )
-                        )
-                      ],
-                    )
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                              child: AppButton(
+                                height: 55.0,
+                                enabled: true,
+                                buttonText: AppStrings.addEquipment,
+                                enabledColor: bYellow,
+                                voidCallback: () {
+                                  if (_formKey.currentState.validate()) {
+                                    _formKey.currentState.save();
+                                    Equipment equipment = Equipment(name: equipmentNameController.text, capacity: capacityController.text, service: widget.service);
+                                    Navigator.pushNamed(context, AppRoutes.toBillCategoryScreen, arguments: CategoryScreenArguments(equipment));
+                                  }
 
-                  ],
-                ),
+                                },
+                              )
+                          )
+                        ],
+                      )
+
+                    ],
+                  ),
+              ),
             ),
           );
         });
@@ -244,4 +279,10 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
       ),
     );
   }
+}
+
+class EquipmentScreenArgument {
+  final String service;
+
+  EquipmentScreenArgument(this.service);
 }

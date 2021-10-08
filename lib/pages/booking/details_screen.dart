@@ -5,6 +5,7 @@ import 'package:service_man/helpers/assets/routes.dart';
 import 'package:service_man/helpers/assets/strings.dart';
 import 'package:service_man/helpers/reusable_screens/app_button.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';
+import 'package:service_man/pages/bill/equipment_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -301,7 +302,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         buttonText: AppStrings.createBill,
                         enabledColor: bYellow,
                         voidCallback: () {
-                          Navigator.pushNamed(context, AppRoutes.toEquipmentScreen);
+                          Navigator.pushNamed(context, AppRoutes.toEquipmentScreen, arguments: EquipmentScreenArgument(widget.getBookingResponse.name));
                         },
                       )
                   )
