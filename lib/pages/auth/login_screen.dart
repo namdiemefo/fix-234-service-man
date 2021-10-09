@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:service_man/core/login/login_bloc.dart';
+import 'package:service_man/core/blocs/login/login_bloc.dart';
 import 'package:service_man/helpers/assets/colors.dart';
 import 'package:service_man/helpers/assets/routes.dart';
 import 'package:service_man/helpers/assets/strings.dart';

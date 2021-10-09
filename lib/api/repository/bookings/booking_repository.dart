@@ -41,7 +41,7 @@ class BookingRepository extends BookingInterface {
   Future<Tuple2<List<GetBookingResponse> , String>> getPendingJobs({String token}) async {
     
     try {
-      MyResponseModel myResponseModel = await client.bookings(token);
+      MyResponseModel myResponseModel = await client.bookings(token, "");
       if (myResponseModel.code == 200) {
         List response = myResponseModel.data;
         List<GetBookingResponse> getBookingResponse = List<GetBookingResponse>.unmodifiable(
@@ -62,7 +62,7 @@ class BookingRepository extends BookingInterface {
   Future<Tuple2<MyResponseModel, String>> requestReassignment({String reason, String bookingId, String token}) async {
 
     try {
-      MyResponseModel myResponseModel = await client.bookings(token);
+      MyResponseModel myResponseModel = await client.bookings(token, "1");
       if (myResponseModel.code == 200) {
         return Tuple2(myResponseModel, null);
       } else {
@@ -79,9 +79,30 @@ class BookingRepository extends BookingInterface {
   Future<Tuple2<MyResponseModel, String>> updateStatus({String status, String bookingId, String token}) async {
 
     try {
-      MyResponseModel myResponseModel = await client.bookings(token);
+      MyResponseModel myResponseModel = await client.bookings(token, "");
       if (myResponseModel.code == 200) {
         return Tuple2(myResponseModel, null);
+      } else {
+        return Tuple2(null, myResponseModel.message);
+      }
+
+    } on DioError catch (e) {
+      return Tuple2(null, e.response.data);
+    }
+
+  }
+
+  @override
+  Future<Tuple2<List<GetBookingResponse>, String>> getJobHistory({String token}) async {
+
+    try {
+      MyResponseModel myResponseModel = await client.bookings(token, "1");
+      if (myResponseModel.code == 200) {
+        List response = myResponseModel.data;
+        List<GetBookingResponse> getBookingResponse = List<GetBookingResponse>.unmodifiable(
+            response.map((e) => GetBookingResponse.fromJson(e)).toList()
+        );
+        return Tuple2(getBookingResponse, null);
       } else {
         return Tuple2(null, myResponseModel.message);
       }

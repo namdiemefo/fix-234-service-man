@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:service_man/api/models/bill/create_bill_model.dart';
 import 'package:service_man/api/models/parts_service/part_service.dart';
-import 'package:service_man/core/parts/parts_bloc.dart';
+import 'package:service_man/core/blocs/parts/parts_bloc.dart';
 import 'package:service_man/helpers/assets/colors.dart';
 import 'package:service_man/helpers/assets/strings.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';

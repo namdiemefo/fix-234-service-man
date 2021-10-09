@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:service_man/api/models/auth/response/login_response_model.dart';
 import 'package:service_man/api/models/bookings/response/get_booking_response.dart';
-import 'package:service_man/core/jobs/jobs_bloc.dart';
+import 'package:service_man/core/blocs/jobs/jobs_bloc.dart';
 import 'package:service_man/db/app_storage.dart';
 import 'package:service_man/helpers/assets/colors.dart';
 import 'package:service_man/helpers/assets/images.dart';

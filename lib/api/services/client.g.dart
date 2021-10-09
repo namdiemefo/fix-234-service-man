@@ -122,9 +122,9 @@ class _Client implements Client {
   }
 
   @override
-  Future<MyResponseModel> bookings(token) async {
+  Future<MyResponseModel> bookings(token, search) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'status': search};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(Options(

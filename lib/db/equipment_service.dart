@@ -1,3 +1,4 @@
+import 'package:rxdart/rxdart.dart';
 import 'package:service_man/api/models/bill/create_bill_model.dart';
 
 class EquipmentService {
@@ -9,6 +10,8 @@ class EquipmentService {
 
   List<Equipment> _equipment = [];
   List<Parts> _parts = [];
+  // ignore: close_sinks
+  final equipmentSubject = BehaviorSubject<List<Equipment>>();
 
   List<Equipment> get equipment => _equipment;
   List<Parts> get parts => _parts;

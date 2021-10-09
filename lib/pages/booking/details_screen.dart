@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:service_man/api/models/bookings/response/get_booking_response.dart';
 import 'package:service_man/helpers/assets/colors.dart';
+import 'package:service_man/helpers/assets/images.dart';
 import 'package:service_man/helpers/assets/routes.dart';
 import 'package:service_man/helpers/assets/strings.dart';
 import 'package:service_man/helpers/reusable_screens/app_button.dart';
@@ -241,8 +242,14 @@ class _DetailScreenState extends State<DetailScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        widget.getBookingResponse.userImage.isEmpty || widget.getBookingResponse.userImage == null ?
                         CircleAvatar(
                           radius: 30.0,
+                          backgroundImage: AssetImage('${Images.people}'),
+                        ):
+                        CircleAvatar(
+                          radius: 30.0,
+                          backgroundImage: NetworkImage("${widget.getBookingResponse.userImage}"),
                         ),
                         AppUtils.horizontalSpacing(width: AppUtils.screenAwareSize(20.0, context)),
                         Column(
@@ -284,7 +291,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               enabledColor: bPurple,
                               voidCallback: () {
                                 // _callNumber(widget.getBookingResponse.userPhone);
-                                _callNumber('09080773642');
+                                _callNumber('${widget.getBookingResponse.userPhone}');
                               },
                             )
                         )
@@ -332,6 +339,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   void _callNumber(String phoneNumber) async {
     String url = 'tel:' + phoneNumber;
+    print(url);
     if (await canLaunch(url)) {
       await launch(url);
     } else {
