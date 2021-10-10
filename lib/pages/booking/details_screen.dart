@@ -310,7 +310,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         enabledColor: bYellow,
                         voidCallback: () {
                           print(widget.getBookingResponse.name);
-                          Navigator.pushNamed(context, AppRoutes.toEquipmentScreen, arguments: EquipmentScreenArgument(widget.getBookingResponse.name));
+                          Navigator.pushNamed(context, AppRoutes.toEquipmentScreen, arguments: EquipmentScreenArgument(widget.getBookingResponse.name, widget.getBookingResponse.id));
                         },
                       )
                   )

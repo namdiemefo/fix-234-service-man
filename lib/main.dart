@@ -188,7 +188,7 @@ class NavigationPageState extends State<NavigationPage>
 
       case AppRoutes.toEquipmentScreen:
         EquipmentScreenArgument args = settings.arguments;
-        builder = EquipmentScreen(service: args.service);
+        builder = EquipmentScreen(service: args.service, bookingId: args.bookingId);
         break;
 
       case AppRoutes.toBillCategoryScreen:
@@ -208,8 +208,7 @@ class NavigationPageState extends State<NavigationPage>
 
       case AppRoutes.toBillPreviewScreen:
         PreviewScreenArguments args = settings.arguments;
-        print(args.serviceName);
-        builder = PreviewScreen(equipment: args.equipments, serviceName: args.serviceName);
+        builder = PreviewScreen(equipment: args.equipments, serviceName: args.serviceName, bookingId: args.bookingId);
         break;
 
       case AppRoutes.toBillSuccessScreen:

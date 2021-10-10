@@ -11,15 +11,17 @@ import 'package:service_man/pages/bill/preview_screen.dart';
 
 class EquipmentScreen extends StatefulWidget {
   final String service;
+  final String bookingId;
 
-  const EquipmentScreen({Key key, this.service}) : super(key: key);
+  const EquipmentScreen({Key key, this.service, this.bookingId}) : super(key: key);
   @override
-  _EquipmentScreenState createState() => _EquipmentScreenState(service);
+  _EquipmentScreenState createState() => _EquipmentScreenState(service, bookingId);
 }
 
 class _EquipmentScreenState extends State<EquipmentScreen> {
 
   final String service;
+  final String bookingId;
 
   bool list = false;
   List<Equipment> equipmentList = [];
@@ -27,7 +29,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
   TextEditingController capacityController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  _EquipmentScreenState(this.service);
+  _EquipmentScreenState(this.service, this.bookingId);
 
   void _displayBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -282,7 +284,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
                     child: AppButton(
                       voidCallback: () {
                         print(widget.service);
-                        Navigator.pushNamed(context, AppRoutes.toBillPreviewScreen, arguments: PreviewScreenArguments(equipmentList, widget.service));
+                        Navigator.pushNamed(context, AppRoutes.toBillPreviewScreen, arguments: PreviewScreenArguments(equipmentList, widget.service, widget.bookingId));
                       },
                       enabledColor: bPurple,
                       enabled: true,
@@ -305,6 +307,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
 
 class EquipmentScreenArgument {
   final String service;
+  final String bookingId;
 
-  EquipmentScreenArgument(this.service);
+  EquipmentScreenArgument(this.service, this.bookingId);
 }

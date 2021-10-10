@@ -16,14 +16,15 @@ class PreviewScreen extends StatelessWidget {
 
   final List<Equipment> equipment;
   final String serviceName;
+  final String bookingId;
 
-  const PreviewScreen({Key key, this.equipment, this.serviceName}) : super(key: key);
+  const PreviewScreen({Key key, this.equipment, this.serviceName, this.bookingId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
           create: (context) => PreviewBloc(),
-          child: _PreviewScreen(equipment: equipment, serviceName: serviceName),
+          child: _PreviewScreen(equipment: equipment, serviceName: serviceName, bookingId: bookingId),
 );
   }
 }
@@ -33,8 +34,9 @@ class _PreviewScreen extends StatefulWidget {
 
   final List<Equipment> equipment;
   final String serviceName;
+  final String bookingId;
 
-  const _PreviewScreen({Key key, this.equipment, this.serviceName}) : super(key: key);
+  const _PreviewScreen({Key key, this.equipment, this.serviceName, this.bookingId}) : super(key: key);
 
   @override
   __PreviewScreenState createState() => __PreviewScreenState();
@@ -44,7 +46,6 @@ class __PreviewScreenState extends State<_PreviewScreen> {
 
   @override
   void initState() {
-    print(widget.serviceName);
     super.initState();
   }
 
@@ -318,7 +319,13 @@ class __PreviewScreenState extends State<_PreviewScreen> {
                             enabledColor: bPurple,
                             buttonText: AppStrings.sendBill,
                             voidCallback: () {
-                              CreateBillModel createBillModel = CreateBillModel();
+                              CreateBillModel createBillModel = CreateBillModel(
+                                booking: widget.bookingId,
+                                partsTotal: _getPartsTotal(widget.equipment),
+                                servicingTotal: _getServicingTotal(widget.equipment),
+                                report: '',
+                                total: _calculateTotal(widget.equipment)
+                              );
                               BlocProvider.of<PreviewBloc>(context).add(CreateBill(createBillModel));
                             },
                             textColor: bWhite,
@@ -357,11 +364,44 @@ class __PreviewScreenState extends State<_PreviewScreen> {
     return total;
 
   }
+
+ int _getPartsTotal(List<Equipment> equipments) {
+    int partsTotal = 0;
+
+    if (equipments.isNotEmpty) {
+      equipments.forEach((equipment) {
+        if (equipment.servicing != null && equipment.servicing.isNotEmpty) {
+          equipment.parts.forEach((part) {
+            partsTotal += part.price;
+          });
+        }
+      });
+    }
+    return partsTotal;
+ }
+
+  int _getServicingTotal(List<Equipment> equipments) {
+    int servicingTotal = 0;
+
+    if (equipments.isNotEmpty) {
+      equipments.forEach((equipment) {
+        if (equipment.servicing != null && equipment.servicing.isNotEmpty) {
+          equipment.servicing.forEach((service) {
+            servicingTotal += service.price;
+          });
+        }
+      });
+    }
+
+    return servicingTotal;
+  }
+
 }
 
 class PreviewScreenArguments {
   final List<Equipment> equipments;
   final String serviceName;
+  final String bookingId;
 
-  PreviewScreenArguments(this.equipments, this.serviceName);
+  PreviewScreenArguments(this.equipments, this.serviceName, this.bookingId);
 }
