@@ -175,11 +175,11 @@ class _Client implements Client {
   }
 
   @override
-  Future<MyResponseModel> createBill(token, billRequestModel) async {
+  Future<MyResponseModel> createBill(token, createBillModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(billRequestModel.toJson());
+    _data.addAll(createBillModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(Options(
                 method: 'POST',

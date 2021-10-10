@@ -11,5 +11,6 @@ class Images {
   static const home_selected = '$baseIconPath/home_selected.svg';
   static const logo = '$baseIconPath/logo.png';
   static const people = '$baseIconPath/people.svg';
+  static const place_holder = '$baseIconPath/placeholder_cp.png';
   static const people_selected = '$baseIconPath/people_selected.svg';
 }

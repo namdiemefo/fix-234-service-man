@@ -10,8 +10,8 @@ class EquipmentService {
 
   List<Equipment> _equipment = [];
   List<Parts> _parts = [];
-  // ignore: close_sinks
-  final equipmentSubject = BehaviorSubject<List<Equipment>>();
+  // // ignore: close_sinks
+  // final equipmentSubject = BehaviorSubject<List<Equipment>>();
 
   List<Equipment> get equipment => _equipment;
   List<Parts> get parts => _parts;
@@ -20,6 +20,23 @@ class EquipmentService {
   void addEquipment(Equipment equipment) {
     _equipment.add(equipment);
   }
+  
+  void addEquipmentPartsByService(Equipment equipment) {
+    if (_equipment.isEmpty) {
+      _equipment.add(equipment);
+    } else {
+      _equipment.forEach((element) {
+        if (element.service == equipment.service) {
+          if (element.parts.isEmpty) {
+            element.parts = [];
+            // element.parts.add(equipment.)
+          }
+        }
+      });
+    }
+    
+  }
+  
 
   void removeEquipment(Equipment equipment) {
     _equipment.remove(equipment);

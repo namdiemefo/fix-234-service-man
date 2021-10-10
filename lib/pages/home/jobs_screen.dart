@@ -37,7 +37,7 @@ class __JobScreenState extends State<_JobScreen> {
   bool _isLoading =  false;
   RefreshController _refreshController = RefreshController(initialRefresh: false);
   final AppStorage _appStorage = locator<AppStorage>();
-  String user, role;
+  String user, role, image;
 
   @override
   void initState() {
@@ -55,6 +55,7 @@ class __JobScreenState extends State<_JobScreen> {
     LoginResponseModel loginResponseModel = await _appStorage.getUser();
     user = loginResponseModel.fullName;
     role = loginResponseModel.type;
+    image = loginResponseModel.image;
   }
 
   @override
@@ -94,6 +95,7 @@ class __JobScreenState extends State<_JobScreen> {
               children: [
                 CircleAvatar(
                   radius: 30.0,
+                  backgroundImage: image == null || image.isEmpty ? AssetImage(Images.place_holder) : NetworkImage(image),
                 ),
                 AppUtils.horizontalSpacing(width: 10.0),
                 Column(

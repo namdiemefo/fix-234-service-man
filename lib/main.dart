@@ -207,7 +207,9 @@ class NavigationPageState extends State<NavigationPage>
         break;
 
       case AppRoutes.toBillPreviewScreen:
-        builder = PreviewScreen();
+        PreviewScreenArguments args = settings.arguments;
+        print(args.serviceName);
+        builder = PreviewScreen(equipment: args.equipments, serviceName: args.serviceName);
         break;
 
       case AppRoutes.toBillSuccessScreen:

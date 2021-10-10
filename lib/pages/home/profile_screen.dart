@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:service_man/api/models/auth/response/login_response_model.dart';
+import 'package:service_man/core/blocs/profile/profile_bloc.dart';
 import 'package:service_man/db/app_storage.dart';
 import 'package:service_man/helpers/assets/colors.dart';
 import 'package:service_man/helpers/assets/images.dart';
@@ -22,7 +27,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController idController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  String user, staffId, phone;
+  String imageUrl = '';
+  ImagePicker picker;
+  String user, staffId, phone, image;
 
   @override
   void initState() {
@@ -35,6 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     user = loginResponseModel.fullName;
     staffId = loginResponseModel.staffId;
     phone = loginResponseModel.phone;
+    image = loginResponseModel.image;
 
     phoneController.text = phone;
     idController.text = staffId;
@@ -63,10 +71,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 CircleAvatar(
                   radius: 50.0,
+                  backgroundImage: image == null || image.isEmpty ? AssetImage(Images.place_holder) : NetworkImage(image),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 70.0),
-                  child: Image.asset(Images.camera, height: 15.0, width: 15.0,),
+                  child: InkWell(
+                      onTap: () {
+                        _showPicker(context);
+                      },
+                      child: Image.asset(Images.camera, height: 15.0, width: 15.0)
+                  ),
                 )
               ],
             ),
@@ -140,5 +154,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
+  }
+
+  void _showPicker(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext btc) {
+          return SafeArea(
+              child: Wrap(
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.photo_library),
+                    title: Text('Photo Library'),
+                    onTap: () async  {
+                      // PermissionStatus permissionStatus =
+                      //     await Permission.camera.request();
+                      _imgFromLibrary(context);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+
+                  ListTile(
+                    leading: Icon(Icons.photo_camera),
+                    title: Text('Camera'),
+                    onTap: () {
+                      _imgFromCamera(context);
+                    },
+                  )
+                ],
+              )
+          );
+        }
+    );
+  }
+
+  Future<void> _imgFromLibrary(BuildContext context) async {
+    File _image = await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    if (_image != null) {
+      BlocProvider.of<ProfileBloc>(context).add(PickImageEvent(_image));
+    }
+
+    //_image = File(image.path);
+  }
+
+  Future<void> _imgFromCamera(BuildContext context) async {
+    File _image = await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 50);
+    if (_image != null) {
+      BlocProvider.of<ProfileBloc>(context).add(PickImageEvent(_image));
+    }
   }
 }

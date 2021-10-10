@@ -2,7 +2,7 @@
     package="com.ionec.service_man">
    <application
         android:label="service_man"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -7,22 +7,27 @@ import 'package:service_man/helpers/assets/strings.dart';
 import 'package:service_man/helpers/reusable_screens/app_button.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';
 import 'package:service_man/pages/bill/category_screen.dart';
+import 'package:service_man/pages/bill/preview_screen.dart';
 
 class EquipmentScreen extends StatefulWidget {
   final String service;
 
   const EquipmentScreen({Key key, this.service}) : super(key: key);
   @override
-  _EquipmentScreenState createState() => _EquipmentScreenState();
+  _EquipmentScreenState createState() => _EquipmentScreenState(service);
 }
 
 class _EquipmentScreenState extends State<EquipmentScreen> {
 
+  final String service;
+
   bool list = false;
-  List<Equipment> equipment = [];
+  List<Equipment> equipmentList = [];
   TextEditingController equipmentNameController = TextEditingController();
   TextEditingController capacityController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  _EquipmentScreenState(this.service);
 
   void _displayBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -136,8 +141,11 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
                                 voidCallback: () {
                                   if (_formKey.currentState.validate()) {
                                     _formKey.currentState.save();
-                                    Equipment equipment = Equipment(name: equipmentNameController.text, capacity: capacityController.text, service: widget.service);
-                                    Navigator.pushNamed(context, AppRoutes.toBillCategoryScreen, arguments: CategoryScreenArguments(equipment));
+                                    Equipment equipment = Equipment(name: equipmentNameController.text, capacity: capacityController.text, servicing: [], parts: [], service: widget.service);
+                                    equipmentList.add(equipment);
+                                    setState(() {
+
+                                    });
                                   }
 
                                 },
@@ -191,58 +199,7 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            list ? ListView.builder(
-                shrinkWrap: true,
-                itemCount: 3,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    height: AppUtils.screenAwareSize(60.0, context),
-                    child: Slidable(
-                      secondaryActions: [
-                        IconSlideAction(
-                          caption: '',
-                          color: Colors.transparent,
-                          iconWidget: Icon(Icons.delete, color: bPink),
-                          onTap: () {
-
-                          },
-                        )
-                      ],
-                      actionPane: SlidableDrawerActionPane(),
-                      actionExtentRatio: 0.25,
-                      child: Card(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                        color: bPurple,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 14.0, right: 20.0, top: 8.0, bottom: 8.0),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                    child: Text(
-                                      '40-60 KVA • Mikano Gen 1',
-                                      style: AppUtils.adaptableTextStyle(size: 13.0, fontWeight: FontWeight.normal, color: bWhite),
-                                    ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      boxShadow: [BoxShadow(color: bWhite, spreadRadius: AppUtils.screenAwareSize(10.0, context))]
-                                  ),
-                                  child: Text(
-                                    '2',
-                                    style: AppUtils.adaptableTextStyle(size: 14.0, fontWeight: FontWeight.normal, color: bPurple),
-                                  ),
-                                )
-                              ],
-                            ),
-                        ),
-                        ),
-                      ),
-                  );
-                }
-            )
-            : Padding(
+            equipmentList == null || equipmentList.isEmpty ? Padding(
               padding: const EdgeInsets.only(top: 200.0),
               child: Center(
                 child: Row(
@@ -251,13 +208,72 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
                     Expanded(
                         child: Text(
                           AppStrings.noEquipmentText,
-                          style: AppUtils.adaptableTextStyle(size: 18.0, color: bHintColor, fontWeight: FontWeight.normal),
+                          style: AppUtils.adaptableTextStyle(size: 14.0, color: bHintColor, fontWeight: FontWeight.normal),
                           textAlign: TextAlign.center,
                         )
                     )
                   ],
                 ),
               ),
+            ) :
+            ListView.builder(
+                shrinkWrap: true,
+                itemCount: equipmentList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.toBillCategoryScreen, arguments: CategoryScreenArguments(equipmentList[index]));
+                    },
+                    child: Container(
+                      height: AppUtils.screenAwareSize(60.0, context),
+                      child: Slidable(
+                        secondaryActions: [
+                          IconSlideAction(
+                            caption: '',
+                            color: Colors.transparent,
+                            iconWidget: Icon(Icons.delete, color: bPink),
+                            onTap: () {
+                              equipmentList.remove(equipmentList[index]);
+                              setState(() {
+
+                              });
+                            },
+                          )
+                        ],
+                        actionPane: SlidableDrawerActionPane(),
+                        actionExtentRatio: 0.25,
+                        child: Card(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                          color: bPurple,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 14.0, right: 20.0, top: 8.0, bottom: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    '${equipmentList[index].name} ${equipmentList[index].capacity}',
+                                    style: AppUtils.adaptableTextStyle(size: 13.0, fontWeight: FontWeight.normal, color: bWhite),
+                                  ),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      boxShadow: [BoxShadow(color: bWhite, spreadRadius: AppUtils.screenAwareSize(10.0, context))]
+                                  ),
+                                  child: Text(
+                                    '${getPartsAndServicingCount(equipmentList[index])}',
+                                    style: AppUtils.adaptableTextStyle(size: 14.0, fontWeight: FontWeight.normal, color: bPurple),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }
             ),
             Spacer(),
             Row(
@@ -265,7 +281,8 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
                 Expanded(
                     child: AppButton(
                       voidCallback: () {
-                        Navigator.pushNamed(context, AppRoutes.toBillPreviewScreen);
+                        print(widget.service);
+                        Navigator.pushNamed(context, AppRoutes.toBillPreviewScreen, arguments: PreviewScreenArguments(equipmentList, widget.service));
                       },
                       enabledColor: bPurple,
                       enabled: true,
@@ -278,6 +295,11 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
         ),
       ),
     );
+  }
+
+  int getPartsAndServicingCount(Equipment equipment) {
+    int count = equipment.servicing.length + equipment.parts.length;
+    return count;
   }
 }
 

@@ -245,7 +245,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         widget.getBookingResponse.userImage.isEmpty || widget.getBookingResponse.userImage == null ?
                         CircleAvatar(
                           radius: 30.0,
-                          backgroundImage: AssetImage('${Images.people}'),
+                          backgroundImage: AssetImage('${Images.place_holder}'),
                         ):
                         CircleAvatar(
                           radius: 30.0,
@@ -309,6 +309,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         buttonText: AppStrings.createBill,
                         enabledColor: bYellow,
                         voidCallback: () {
+                          print(widget.getBookingResponse.name);
                           Navigator.pushNamed(context, AppRoutes.toEquipmentScreen, arguments: EquipmentScreenArgument(widget.getBookingResponse.name));
                         },
                       )
@@ -343,7 +344,8 @@ class _DetailScreenState extends State<DetailScreen> {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      throw 'Could not launch $url';
+      AppUtils.showErrorFlushBar(context, 'Enable permission');
+      // throw 'Could not launch $url';
     }
   }
 }
