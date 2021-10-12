@@ -38,22 +38,32 @@ class __PartsScreenState extends State<_PartsScreen> {
   List<PartService> partService = [];
   List<PartService> trackService = [];
   bool isChecked = false;
+  var result;
+
+  @override
+  void initState() {
+    result = widget.equipment;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     return WillPopScope(
       onWillPop: () async {
-        Equipment equipment = widget.equipment;
-        if (widget.equipment.parts.isNotEmpty) {
-          EquipmentService.instance.addEquipment(equipment);
-        }
+        Navigator.pop(context, widget.equipment);
         return true;
       },
       child: Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(
               color: bDark
+          ),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context, widget.equipment);
+            },
+            icon: Icon(Icons.arrow_back, color: Colors.black),
           ),
           centerTitle: true,
           backgroundColor: bMilk,
@@ -115,11 +125,9 @@ class __PartsScreenState extends State<_PartsScreen> {
                                                   if (val) {
                                                     trackService.add(partService[index]);
                                                     widget.equipment.parts.add(part);
-                                                    print(widget.equipment.parts.length);
                                                   } else {
                                                     trackService.remove(partService[index]);
                                                     widget.equipment.parts.remove(part);
-                                                    print(widget.equipment.parts.length);
                                                   }
                                                   setState(() {
 

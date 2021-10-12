@@ -223,8 +223,17 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
                 itemCount: equipmentList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, AppRoutes.toBillCategoryScreen, arguments: CategoryScreenArguments(equipmentList[index]));
+                    onTap: () async {
+                      final result = await Navigator.pushNamed(context, AppRoutes.toBillCategoryScreen, arguments: CategoryScreenArguments(equipmentList[index]));
+                      if (result is Equipment) {
+                        //Equipment anEquipment =  equipmentList.firstWhere((element) => element.name == result.name);
+                        equipmentList.removeWhere((element) => element.name == result.name);
+                        equipmentList.add(result);
+                        setState(() {
+
+                        });
+                      }
+                      print("result is ${result.toString()}");
                     },
                     child: Container(
                       height: AppUtils.screenAwareSize(60.0, context),

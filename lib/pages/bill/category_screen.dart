@@ -16,12 +16,27 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+
+  var result;
+
+  @override
+  void initState() {
+    result = widget.equipment;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
             color: bDark
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context, result);
+          },
+          icon: Icon(Icons.arrow_back, color: Colors.black),
         ),
         centerTitle: true,
         backgroundColor: bMilk,
@@ -38,8 +53,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.toBillPartsScreen, arguments: PartsScreenArguments(widget.equipment));
+              onTap: () async {
+               result = await Navigator.pushNamed(context, AppRoutes.toBillPartsScreen, arguments: PartsScreenArguments(widget.equipment));
               },
               child: Row(
                 children: [

@@ -44,16 +44,19 @@ class _ServicingScreenState extends State<_ServicingScreen> {
     final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     return WillPopScope(
       onWillPop: () async {
-        Equipment equipment = widget.equipment;
-        if (widget.equipment.servicing.isNotEmpty) {
-          EquipmentService.instance.addEquipment(equipment);
-        }
+        Navigator.pop(context, widget.equipment);
         return true;
       },
       child: Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(
               color: bDark
+          ),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context, widget.equipment);
+            },
+            icon: Icon(Icons.arrow_back, color: Colors.black),
           ),
           centerTitle: true,
           backgroundColor: bMilk,
@@ -109,13 +112,14 @@ class _ServicingScreenState extends State<_ServicingScreen> {
                                                 activeColor: bWhite,
                                                 value: trackService.contains(partService[index]),
                                                 onChanged: (bool val) {
-                                                  Parts part = Parts(name: partService[index].name, service: partService[index].service, price: partService[index].price);
+                                                  Servicing part = Servicing(name: partService[index].name, service: partService[index].service, price: partService[index].price);
+                                                  print("val : $val");
                                                   if (val) {
                                                     trackService.add(partService[index]);
-                                                    widget.equipment.parts.add(part);
+                                                    widget.equipment.servicing.add(part);
                                                   } else {
                                                     trackService.remove(partService[index]);
-                                                    widget.equipment.parts.remove(part);
+                                                    widget.equipment.servicing.remove(part);
                                                   }
                                                   setState(() {
 
