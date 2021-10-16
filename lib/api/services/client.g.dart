@@ -23,7 +23,7 @@ class _Client implements Client {
     _data.addAll(loginRequestModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(
-            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra,)
+            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, 'technician/auth/login', data: _data,
                     queryParameters: queryParameters)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
@@ -40,7 +40,7 @@ class _Client implements Client {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, 'technician/auth/forgot',
+                .compose(_dio.options, 'technician/auth/forgot', data: _data,
                     queryParameters: queryParameters)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
@@ -58,7 +58,7 @@ class _Client implements Client {
                 method: 'POST',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
-            .compose(_dio.options, 'technician/auth/change',
+            .compose(_dio.options, 'technician/auth/change',data: _data,
                 queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
@@ -76,7 +76,7 @@ class _Client implements Client {
                 method: 'POST',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
-            .compose(_dio.options, 'technician/auth/verify',
+            .compose(_dio.options, 'technician/auth/verify', data: _data,
                 queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
@@ -97,7 +97,7 @@ class _Client implements Client {
                 method: 'POST',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
-            .compose(_dio.options, 'technician/auth/upload',
+            .compose(_dio.options, 'technician/auth/upload', data: _data,
                 queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
@@ -114,7 +114,7 @@ class _Client implements Client {
                 method: 'POST',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
-            .compose(_dio.options, 'technician/auth/image',
+            .compose(_dio.options, 'technician/auth/image', data: _data,
                 queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
@@ -131,7 +131,7 @@ class _Client implements Client {
                 method: 'GET',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
-            .compose(_dio.options, 'technician/booking/',
+            .compose(_dio.options, 'technician/booking/', data: _data,
                 queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
@@ -202,7 +202,25 @@ class _Client implements Client {
                 method: 'GET',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
-            .compose(_dio.options, 'technician/booking/bills',
+            .compose(_dio.options, 'technician/booking/bills', data: _data,
+                queryParameters: queryParameters)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = MyResponseModel.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<MyResponseModel> complete(token, completeBillRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(completeBillRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MyResponseModel>(Options(
+                method: 'POST',
+                headers: <String, dynamic>{r'Authorization': token},
+                extra: _extra)
+            .compose(_dio.options, 'technician/booking/complete', data: _data,
                 queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
@@ -219,7 +237,7 @@ class _Client implements Client {
                 method: 'GET',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
-            .compose(_dio.options, 'technician/booking/parts',
+            .compose(_dio.options, 'technician/booking/parts', data: _data,
                 queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
@@ -236,7 +254,7 @@ class _Client implements Client {
                 method: 'GET',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
-            .compose(_dio.options, 'technician/booking/servicing',
+            .compose(_dio.options, 'technician/booking/servicing', data: _data,
                 queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);

@@ -7,6 +7,7 @@ import 'package:service_man/helpers/assets/strings.dart';
 import 'package:service_man/helpers/reusable_screens/app_button.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';
 import 'package:service_man/pages/bill/equipment_screen.dart';
+import 'package:service_man/pages/booking/summary_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -325,7 +326,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         buttonText: AppStrings.completeJob,
                         enabledColor: bGreen,
                         voidCallback: () {
-                          Navigator.pushNamed(context, AppRoutes.toSummaryScreen);
+                          Navigator.pushNamed(context, AppRoutes.toSummaryScreen, arguments: SummaryArguments(widget.getBookingResponse.id));
                         },
                       )
                   )

@@ -183,7 +183,8 @@ class NavigationPageState extends State<NavigationPage>
         break;
 
       case AppRoutes.toSummaryScreen:
-        builder = SummaryScreen();
+        SummaryArguments args = settings.arguments;
+        builder = SummaryScreen(bookingId: args.bookingId);
         break;
 
       case AppRoutes.toEquipmentScreen:
