@@ -4,12 +4,24 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Fix234 Technician</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>NSAppleMusicUsageDescription</key>
+    <string>music playback</string>
+    <key>NSCalendarsUsageDescription</key>
+    <string>events</string>
+    <key>NSCameraUsageDescription</key>
+    <string>overlay feature</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Store Locator</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Saving selected wallpaper</string>
 	<key>CFBundleName</key>
 	<string>service_man</string>
 	<key>CFBundlePackageType</key>
@@ -18,12 +30,18 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>CFBundleShortVersionString</key>
+    <string>$(FLUTTER_BUILD_NAME)</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	<key>CFBundleVersion</key>
+    <string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UISupportedInterfaceOrientations</key>

@@ -92,221 +92,230 @@ class __PreviewScreenState extends State<_PreviewScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Container(
-                      decoration: BoxDecoration(
-                        color: bWhite,
-                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
+                  Flexible(
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: bWhite,
+                          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
 
-                            // SERVICE
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15.0, top: 25.0, bottom: 20.0),
-                                  child: AdaptableShadowIcon(
-                                    iconUrl: Images.gen,
-                                    boxShadow: AppUtils.hexToColor('#FEFBF3'),
-                                    radius: 15.0,
-                                    imageWidth: 15.0,
-                                    imageHeight: 15.0,
-                                  ),
+                              // SERVICE
+                              Flexible(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 15.0, top: 25.0, bottom: 20.0),
+                                      child: AdaptableShadowIcon(
+                                        iconUrl: Images.gen,
+                                        boxShadow: AppUtils.hexToColor('#FEFBF3'),
+                                        radius: 15.0,
+                                        imageWidth: 15.0,
+                                        imageHeight: 15.0,
+                                      ),
+                                    ),
+                                    AppUtils.horizontalSpacing(width: 20.0),
+                                    Text(
+                                      '${widget.serviceName} Service',
+                                      style: AppUtils.adaptableTextStyle(size: 16.0, fontWeight: FontWeight.bold, color: AppUtils.hexToColor('#070A28')),
+                                    ),
+
+                                  ],
                                 ),
-                                AppUtils.horizontalSpacing(width: 20.0),
-                                Text(
-                                  '${widget.serviceName} Service',
-                                  style: AppUtils.adaptableTextStyle(size: 16.0, fontWeight: FontWeight.bold, color: AppUtils.hexToColor('#070A28')),
-                                ),
-
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                    child: Divider(
-                                      height: 4.0,
-                                      thickness: 0.5,
-                                      color: Colors.grey,
-                                    )
-                                )
-                              ],
-                            ),
-
-                            AppUtils.verticalSpacing(height: 10.0),
-
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  AppStrings.serviceBill,
-                                  style: AppUtils.adaptableTextStyle(size: 16.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#070A28')),
-                                ),
-                              ],
-                            ),
-
-                            AppUtils.verticalSpacing(height: 10.0),
-
-                            GroupedListView(
-                                elements: widget.equipment,
-                                groupBy: (Equipment equipment) => equipment.name,
-                                order: GroupedListOrder.DESC,
-                                sort: true,
-                                shrinkWrap: true,
-                                useStickyGroupSeparators: false,
-                                groupSeparatorBuilder: (equipment) {
-                                  return Container();
-                                },
-                                itemBuilder: (context, Equipment equipment) {
-                                  return Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          Expanded(
-                                              child: Divider(
-                                                height: 4.0,
-                                                thickness: 0.5,
-                                                color: Colors.grey,
-                                              )
-                                          )
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 10.0),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              '${equipment.name}',
-                                              style: AppUtils.adaptableTextStyle(size: 16.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#070A28')),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      AppUtils.verticalSpacing(height: 5.0),
-
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            AppStrings.parts,
-                                            style: AppUtils.adaptableTextStyle(size: 10.0, fontWeight: FontWeight.bold, color: AppUtils.hexToColor('#625A95')),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        height: 50.0,
-                                        child: ListView.builder(
-                                            itemCount: equipment.parts.length,
-                                            shrinkWrap: true,
-                                            itemBuilder: (context, index) {
-                                              return Padding(
-                                                padding: const EdgeInsets.symmetric(vertical: 5.0),
-                                                child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Text(
-                                                        '${equipment.parts[index].name}',
-                                                        style: AppUtils.adaptableTextStyle(size: 10.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#333333')),
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      'N${equipment.parts[index].price}',
-                                                      style: AppUtils.adaptableTextStyle(size: 10.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#333333')),
-                                                    )
-                                                  ],
-                                                ),
-                                              );
-                                            }
-                                        ),
-                                      ),
-
-                                      AppUtils.verticalSpacing(height: 5.0),
-
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            AppStrings.serviceCharge,
-                                            style: AppUtils.adaptableTextStyle(size: 10.0, fontWeight: FontWeight.bold, color: AppUtils.hexToColor('#FFB24D')),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        child: ListView.builder(
-                                            itemCount: equipment.servicing.length,
-                                            shrinkWrap: true,
-                                            itemBuilder: (context, index) {
-                                              return Padding(
-                                                padding: const EdgeInsets.symmetric(vertical: 5.0),
-                                                child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Text(
-                                                        '${equipment.servicing[index].name}',
-                                                        style: AppUtils.adaptableTextStyle(size: 10.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#333333')),
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      '${equipment.servicing[index].price}',
-                                                      style: AppUtils.adaptableTextStyle(size: 10.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#333333')),
-                                                    )
-                                                  ],
-                                                ),
-                                              );
-                                            }
-                                        ),
-                                      ),
-
-                                    ],
-                                  );
-                                },
-                            ),
-
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                    child: Divider(
-                                      height: 4.0,
-                                      thickness: 0.5,
-                                      color: Colors.grey,
-                                    )
-                                )
-                              ],
-                            ),
-
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              ),
+                              Flexible(child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    AppStrings.total,
-                                    style: AppUtils.adaptableTextStyle(size: 14.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#333333')),
-                                  ),
-                                  Text(
-                                    'NGN ${_calculateTotal(widget.equipment)}',
-                                    style: AppUtils.adaptableTextStyle(size: 18.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#2DBB54')),
+                                  Expanded(
+                                      child: Divider(
+                                        height: 4.0,
+                                        thickness: 0.5,
+                                        color: Colors.grey,
+                                      )
                                   )
                                 ],
-                              ),
-                            )
+                              )),
 
-                          ],
+                              AppUtils.verticalSpacing(height: 10.0),
+
+                              Flexible(child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    AppStrings.serviceBill,
+                                    style: AppUtils.adaptableTextStyle(size: 16.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#070A28')),
+                                  ),
+                                ],
+                              )),
+
+                              AppUtils.verticalSpacing(height: 10.0),
+
+                              Container(
+                                    height: AppUtils.screenAwareSize(500, context),
+                                    child: GroupedListView(
+                                      elements: widget.equipment,
+                                      groupBy: (Equipment equipment) => equipment.name,
+                                      order: GroupedListOrder.DESC,
+                                      sort: false,
+                                      shrinkWrap: true,
+                                      useStickyGroupSeparators: false,
+                                      groupSeparatorBuilder: (equipment) {
+                                        return Container();
+                                      },
+                                      itemBuilder: (context, Equipment equipment) {
+                                        return Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                Expanded(
+                                                    child: Divider(
+                                                      height: 4.0,
+                                                      thickness: 0.5,
+                                                      color: Colors.grey,
+                                                    )
+                                                )
+                                              ],
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(top: 10.0),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    '${equipment.name}',
+                                                    style: AppUtils.adaptableTextStyle(size: 16.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#070A28')),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            AppUtils.verticalSpacing(height: 5.0),
+
+                                            equipment.parts.isEmpty ? Container() : Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  AppStrings.parts,
+                                                  style: AppUtils.adaptableTextStyle(size: 10.0, fontWeight: FontWeight.bold, color: AppUtils.hexToColor('#625A95')),
+                                                ),
+                                              ],
+                                            ),
+                                            equipment.parts.isEmpty ? Container() : Container(
+                                              height: 50.0,
+                                              child: ListView.builder(
+                                                  itemCount: equipment.parts.length,
+                                                  shrinkWrap: true,
+                                                  itemBuilder: (context, index) {
+                                                    return Padding(
+                                                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                                                      child: Row(
+                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                        children: [
+                                                          Expanded(
+                                                            child: Text(
+                                                              '${equipment.parts[index].name}',
+                                                              style: AppUtils.adaptableTextStyle(size: 10.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#333333')),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            'N${equipment.parts[index].price}',
+                                                            style: AppUtils.adaptableTextStyle(size: 10.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#333333')),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    );
+                                                  }
+                                              ),
+                                            ),
+
+                                            AppUtils.verticalSpacing(height: 5.0),
+
+                                            equipment.servicing.isEmpty ? Container() : Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  AppStrings.serviceCharge,
+                                                  style: AppUtils.adaptableTextStyle(size: 10.0, fontWeight: FontWeight.bold, color: AppUtils.hexToColor('#FFB24D')),
+                                                ),
+                                              ],
+                                            ),
+                                            equipment.servicing.isEmpty ? Container() : Container(
+                                              height: 50,
+                                              child: ListView.builder(
+                                                  itemCount: equipment.servicing.length,
+                                                  shrinkWrap: true,
+                                                  itemBuilder: (context, index) {
+                                                    return Padding(
+                                                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                                                      child: Row(
+                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                        children: [
+                                                          Expanded(
+                                                            child: Text(
+                                                              '${equipment.servicing[index].name}',
+                                                              style: AppUtils.adaptableTextStyle(size: 10.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#333333')),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            '${equipment.servicing[index].price}',
+                                                            style: AppUtils.adaptableTextStyle(size: 10.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#333333')),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    );
+                                                  }
+                                              ),
+                                            ),
+
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  ),
+
+
+
+
+                              Flexible(child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                      child: Divider(
+                                        height: 4.0,
+                                        thickness: 0.5,
+                                        color: Colors.grey,
+                                      )
+                                  )
+                                ],
+                              )),
+
+                              Flexible(child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      AppStrings.total,
+                                      style: AppUtils.adaptableTextStyle(size: 14.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#333333')),
+                                    ),
+                                    Text(
+                                      'NGN ${_calculateTotal(widget.equipment)}',
+                                      style: AppUtils.adaptableTextStyle(size: 18.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#2DBB54')),
+                                    )
+                                  ],
+                                ),
+                              ))
+
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  Spacer(),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [

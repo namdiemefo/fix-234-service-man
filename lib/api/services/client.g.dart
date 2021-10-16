@@ -23,8 +23,8 @@ class _Client implements Client {
     _data.addAll(loginRequestModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(
-            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, 'technician/auth/login',
+            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra,)
+                .compose(_dio.options, 'technician/auth/login', data: _data,
                     queryParameters: queryParameters)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
@@ -149,7 +149,7 @@ class _Client implements Client {
                 method: 'PUT',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
-            .compose(_dio.options, 'technician/booking/status',
+            .compose(_dio.options, 'technician/booking/status', data: _data,
                 queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
@@ -167,7 +167,7 @@ class _Client implements Client {
                 method: 'PUT',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
-            .compose(_dio.options, 'technician/booking/request',
+            .compose(_dio.options, 'technician/booking/request', data: _data,
                 queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
@@ -185,7 +185,7 @@ class _Client implements Client {
                 method: 'POST',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
-            .compose(_dio.options, 'technician/booking/bill',
+            .compose(_dio.options, 'technician/booking/bill', data: _data,
                 queryParameters: queryParameters)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);

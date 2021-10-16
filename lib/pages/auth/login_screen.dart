@@ -160,23 +160,23 @@ class __LoginScreenState extends State<_LoginScreen> {
               ),
               AppUtils.verticalSpacing(height: 10.0),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                      onPressed: () {
-                        // final route = MaterialPageRoute(builder: (context) => RegisterPage());
-                        // Navigator.push(context, route);
-                      },
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                          padding: MaterialStateProperty.all(EdgeInsets.zero),
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap
-                      ),
-                      child: Text(AppStrings.forgotPassword, style: TextStyle(fontSize: 12.0 ,color: bPurple) )
-                  )
-                ],
-              )
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   children: [
+              //     TextButton(
+              //         onPressed: () {
+              //           // final route = MaterialPageRoute(builder: (context) => RegisterPage());
+              //           // Navigator.push(context, route);
+              //         },
+              //         style: ButtonStyle(
+              //             backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+              //             padding: MaterialStateProperty.all(EdgeInsets.zero),
+              //             tapTargetSize: MaterialTapTargetSize.shrinkWrap
+              //         ),
+              //         child: Text(AppStrings.forgotPassword, style: TextStyle(fontSize: 12.0 ,color: bPurple) )
+              //     )
+              //   ],
+              // )
 
             ],
           ),

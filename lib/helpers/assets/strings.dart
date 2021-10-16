@@ -41,7 +41,7 @@ class AppStrings {
   static const passwordHint = 'Password';
   static const passwordError = 'Enter Password';
   static const idError = 'Enter valid ID';
-  static const idHelperText = 'FIX-1234';
+  static const idHelperText = 'FX-1234';
   static const forgotPassword = 'Forgot Password?';
   static const idHint = 'Fix-234 Valid ID';
   static const welcomeTo = 'Welcome to';

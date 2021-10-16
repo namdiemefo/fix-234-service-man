@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:service_man/api/middleware/error_interceptor.dart';
+import 'package:service_man/api/models/bill/complete_bill_request.dart';
 import 'package:service_man/api/models/bill/create_bill_model.dart';
 import 'package:service_man/api/models/bill/create_bill_response.dart';
 import 'package:service_man/api/models/parts_service/part_service.dart';
@@ -87,7 +88,26 @@ class BillsRepository extends BillsInterface {
 
       MyResponseModel myResponseModel = await client.createBill(token, createBillModel);
       if (myResponseModel.code == 200) {
-        CreateBillResponse response = myResponseModel.data;
+        CreateBillResponse response = CreateBillResponse.fromJson(myResponseModel.data);
+        return Tuple2(response, null);
+      } else {
+        return Tuple2(null, myResponseModel.message);
+      }
+
+    } on DioError catch (e) {
+      return Tuple2(null, e.response.data);
+    }
+
+  }
+
+  @override
+  Future<Tuple2<CreateBillResponse, String>> complete({String token, CompleteBillRequest completeBillRequest}) async {
+
+    try {
+
+      MyResponseModel myResponseModel = await client.complete(token, completeBillRequest);
+      if (myResponseModel.code == 200) {
+        CreateBillResponse response = CreateBillResponse.fromJson(myResponseModel.data);
         return Tuple2(response, null);
       } else {
         return Tuple2(null, myResponseModel.message);

@@ -7,7 +7,9 @@ import 'package:service_man/api/models/auth/request/change_password_request_mode
 import 'package:service_man/api/models/auth/request/forgot_password_request_model.dart';
 import 'package:service_man/api/models/auth/request/login_request_model.dart';
 import 'package:service_man/api/models/auth/request/verify_otp_request_model.dart';
+import 'package:service_man/api/models/bill/complete_bill_request.dart';
 import 'package:service_man/api/models/bill/create_bill_model.dart';
+import 'package:service_man/api/models/bill/create_bill_response.dart';
 import 'package:service_man/api/models/bookings/request/reassignment_request_model.dart';
 import 'package:service_man/api/models/bookings/request/update_status_request_model.dart';
 import 'package:service_man/api/models/response_model.dart';
@@ -55,6 +57,9 @@ abstract class Client {
 
   @GET('technician/booking/bills')
   Future<MyResponseModel> bills(@Header('Authorization') String token);
+
+  @POST('technician/booking/complete')
+  Future<MyResponseModel> complete(@Header('Authorization') String token, @Body() CompleteBillRequest completeBillRequest);
 
   @GET('technician/booking/parts')
   Future<MyResponseModel> parts(@Header('Authorization') String token, @Query("name") String search);
