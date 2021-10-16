@@ -105,8 +105,7 @@ class __PreviewScreenState extends State<_PreviewScreen> {
                             children: [
 
                               // SERVICE
-                              Flexible(
-                                child: Row(
+                               Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Padding(
@@ -127,8 +126,8 @@ class __PreviewScreenState extends State<_PreviewScreen> {
 
                                   ],
                                 ),
-                              ),
-                              Flexible(child: Row(
+                              Flexible(
+                                  child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Expanded(
@@ -139,11 +138,13 @@ class __PreviewScreenState extends State<_PreviewScreen> {
                                       )
                                   )
                                 ],
-                              )),
+                              )
+                              ),
 
                               AppUtils.verticalSpacing(height: 10.0),
 
-                              Flexible(child: Row(
+                              Flexible(
+                                  child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
@@ -151,12 +152,13 @@ class __PreviewScreenState extends State<_PreviewScreen> {
                                     style: AppUtils.adaptableTextStyle(size: 16.0, fontWeight: FontWeight.normal, color: AppUtils.hexToColor('#070A28')),
                                   ),
                                 ],
-                              )),
+                              )
+                              ),
 
                               AppUtils.verticalSpacing(height: 10.0),
 
                               Container(
-                                    height: AppUtils.screenAwareSize(500, context),
+                                    height: AppUtils.screenAwareSize(360, context),
                                     child: GroupedListView(
                                       elements: widget.equipment,
                                       groupBy: (Equipment equipment) => equipment.name,
@@ -294,7 +296,7 @@ class __PreviewScreenState extends State<_PreviewScreen> {
                                 ],
                               )),
 
-                              Flexible(child: Padding(
+                              Expanded(child: Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10.0),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
