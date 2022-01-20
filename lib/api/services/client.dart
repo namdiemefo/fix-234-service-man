@@ -9,14 +9,13 @@ import 'package:service_man/api/models/auth/request/login_request_model.dart';
 import 'package:service_man/api/models/auth/request/verify_otp_request_model.dart';
 import 'package:service_man/api/models/bill/complete_bill_request.dart';
 import 'package:service_man/api/models/bill/create_bill_model.dart';
-import 'package:service_man/api/models/bill/create_bill_response.dart';
 import 'package:service_man/api/models/bookings/request/reassignment_request_model.dart';
 import 'package:service_man/api/models/bookings/request/update_status_request_model.dart';
 import 'package:service_man/api/models/response_model.dart';
 
 part 'client.g.dart';
 
-@RestApi(baseUrl: "https://fix-234.herokuapp.com/")
+@RestApi(baseUrl: "https://api.fix234.com/")
 abstract class Client {
   factory Client(Dio dio, {String baseUrl}) = _Client;
 

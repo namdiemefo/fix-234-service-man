@@ -36,128 +36,130 @@ class _EquipmentScreenState extends State<EquipmentScreen> {
         backgroundColor: Colors.transparent,
         context: context,
         builder: (ctx) {
-          return Container(
-            height: MediaQuery.of(context).size.height  * 0.4,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0) ),
-              color: bPurple,
-            ),
-            child: Form(
-              key: _formKey,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-                child: Column(
-                    children: [
-                      SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 50.0,
-                            child: Divider(
-                              height: 5.0,
-                              thickness: 2.0,
-                              color: bWhite,
+          return SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height  * 0.4,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0) ),
+                color: bPurple,
+              ),
+              child: Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+                  child: Column(
+                      children: [
+                        SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 50.0,
+                              child: Divider(
+                                height: 5.0,
+                                thickness: 2.0,
+                                color: bWhite,
 
-                            ),
-                          )
-                        ],
-                      ),
-                      AppUtils.verticalSpacing(height: 10.0),
-                      Expanded(
-                        child: Container(
-                              height: 30.0,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      child: TextFormField(
-                                        decoration: InputDecoration(
-                                            fillColor: Colors.grey.shade500,
-                                            filled: true,
-                                            enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(color: lightGrey)
-                                            ),
-                                            border: OutlineInputBorder(
-                                                borderSide: BorderSide(color: lightGrey)
-                                            ),
-                                          hintText: AppStrings.equipmentName,
-                                          hintStyle: AppUtils.adaptableTextStyle(size: 13.0, color: bWhite, fontWeight: FontWeight.normal)
-                                        ),
-                                        validator: (String value) {
-                                          if (value.isEmpty) {
-                                            return "Enter an equipment name";
-                                          }
-                                          return null;
-                                        },
-                                        controller: equipmentNameController,
-                                      )
-                                  ),
-                                ],
-                              )
-                            ),
-                      ),
-                      AppUtils.verticalSpacing(height: 2.0),
-                      Expanded(
-                          child: Container(
-                          height: 30.0,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                  child: TextFormField(
-                                    decoration: InputDecoration(
-                                        fillColor: bWhite,
-                                        filled: true,
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(color: lightGrey)
-                                        ),
-                                        border: OutlineInputBorder(
-                                            borderSide: BorderSide(color: lightGrey)
-                                        ),
-                                        hintText: AppStrings.selectCapacity,
-                                        hintStyle: AppUtils.adaptableTextStyle(size: 13.0, color: bDark, fontWeight: FontWeight.normal)
-                                    ),
-                                    validator: (String value) {
-                                      if (value.isEmpty) {
-                                        return "Enter the capacity";
-                                      }
-                                      return null;
-                                    },
-                                    controller: capacityController,
-                                  )
                               ),
-                            ],
-                          )
-                      )
-                      ),
-                      AppUtils.verticalSpacing(height: 10.0),
+                            )
+                          ],
+                        ),
+                        AppUtils.verticalSpacing(height: 10.0),
+                        Expanded(
+                          child: Container(
+                                height: 30.0,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                              fillColor: Colors.grey.shade500,
+                                              filled: true,
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: lightGrey)
+                                              ),
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: lightGrey)
+                                              ),
+                                            hintText: AppStrings.equipmentName,
+                                            hintStyle: AppUtils.adaptableTextStyle(size: 13.0, color: bWhite, fontWeight: FontWeight.normal)
+                                          ),
+                                          validator: (String value) {
+                                            if (value.isEmpty) {
+                                              return "Enter an equipment name";
+                                            }
+                                            return null;
+                                          },
+                                          controller: equipmentNameController,
+                                        )
+                                    ),
+                                  ],
+                                )
+                              ),
+                        ),
+                        AppUtils.verticalSpacing(height: 2.0),
+                        Expanded(
+                            child: Container(
+                            height: 30.0,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    child: TextFormField(
+                                      decoration: InputDecoration(
+                                          fillColor: bWhite,
+                                          filled: true,
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(color: lightGrey)
+                                          ),
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: lightGrey)
+                                          ),
+                                          hintText: AppStrings.selectCapacity,
+                                          hintStyle: AppUtils.adaptableTextStyle(size: 13.0, color: bDark, fontWeight: FontWeight.normal)
+                                      ),
+                                      validator: (String value) {
+                                        if (value.isEmpty) {
+                                          return "Enter the capacity";
+                                        }
+                                        return null;
+                                      },
+                                      controller: capacityController,
+                                    )
+                                ),
+                              ],
+                            )
+                        )
+                        ),
+                        AppUtils.verticalSpacing(height: 10.0),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                              child: AppButton(
-                                height: 55.0,
-                                enabled: true,
-                                buttonText: AppStrings.addEquipment,
-                                enabledColor: bYellow,
-                                voidCallback: () {
-                                  if (_formKey.currentState.validate()) {
-                                    _formKey.currentState.save();
-                                    Equipment equipment = Equipment(name: equipmentNameController.text, capacity: capacityController.text, servicing: [], parts: [], service: widget.service);
-                                    equipmentList.add(equipment);
-                                    setState(() {
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                                child: AppButton(
+                                  height: 55.0,
+                                  enabled: true,
+                                  buttonText: AppStrings.addEquipment,
+                                  enabledColor: bYellow,
+                                  voidCallback: () {
+                                    if (_formKey.currentState.validate()) {
+                                      _formKey.currentState.save();
+                                      Equipment equipment = Equipment(name: equipmentNameController.text, capacity: capacityController.text, servicing: [], parts: [], service: widget.service);
+                                      equipmentList.add(equipment);
+                                      setState(() {
 
-                                    });
-                                  }
+                                      });
+                                    }
 
-                                },
-                              )
-                          )
-                        ],
-                      )
+                                  },
+                                )
+                            )
+                          ],
+                        )
 
-                    ],
-                  ),
+                      ],
+                    ),
+                ),
               ),
             ),
           );

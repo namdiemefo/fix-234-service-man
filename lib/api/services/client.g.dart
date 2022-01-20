@@ -8,7 +8,7 @@ part of 'client.dart';
 
 class _Client implements Client {
   _Client(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://fix-234.herokuapp.com/';
+    baseUrl ??= 'https://api.fix234.com/';
   }
 
   final Dio _dio;
