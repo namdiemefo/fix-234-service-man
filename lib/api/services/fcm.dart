@@ -106,7 +106,7 @@ class PushNotificationService {
     }
 
     _fcmToken = await _firebaseMessaging.getToken();
-    print("token is $_fcmToken");
+    // print("token is $_fcmToken");
 
     NotificationSettings settings = await _firebaseMessaging.requestPermission(
       alert: true,
