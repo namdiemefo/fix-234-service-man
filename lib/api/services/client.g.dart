@@ -8,12 +8,30 @@ part of 'client.dart';
 
 class _Client implements Client {
   _Client(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://api.fix234.com/';
+    baseUrl ??= 'https://fix-234.herokuapp.com/';
   }
 
   final Dio _dio;
 
   String baseUrl;
+
+  @override
+  Future token(token, tokenModel) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(tokenModel.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MyResponseModel>(
+            Options(method: 'POST',
+                headers: <String, dynamic>{r'Authorization': token},
+                extra: _extra)
+                .compose(_dio.options, 'technician/auth/token', data: _data,
+                queryParameters: queryParameters)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = MyResponseModel.fromJson(_result.data);
+    return value;
+  }
 
   @override
   Future<MyResponseModel> login(loginRequestModel) async {

@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:service_man/api/models/auth/request/login_request_model.dart';
 import 'package:service_man/api/models/auth/response/login_response_model.dart';
+import 'package:service_man/api/models/fcm/token_model.dart';
 import 'package:service_man/api/repository/auth/auth_repository.dart';
 import 'package:service_man/db/app_storage.dart';
 import 'package:service_man/helpers/di/service_locator.dart';
@@ -27,8 +29,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _submitForm(String staffId, String password) async* {
     yield OnLoading();
-    print(staffId);
-    print(password);
+    String fcmToken = await FirebaseMessaging.instance.getToken();
     LoginRequestModel loginRequestModel = LoginRequestModel(staffId: staffId, password: password);
     Tuple2<LoginResponseModel, String> response = await _authRepository.loginTechnician(loginRequestModel);
 
@@ -36,6 +37,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (response.item1 is LoginResponseModel) {
       await _appStorage.persistToken({TokenType.ACCESS: response.item1.token});
       await _appStorage.persistUser(response.item1);
+      TokenModel tokenModel = TokenModel(token: fcmToken);
+      await _authRepository.sendToken('Bearer ${response.item1.token}', tokenModel);
       yield OnSuccess();
     } else if (response.item2 is String) {
       yield OnFailure(response.item2);

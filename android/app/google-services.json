@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "537721283943",
+    "project_id": "fix234-44f19",
+    "storage_bucket": "fix234-44f19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537721283943:android:c39a542cd9d2ee9193fbc2",
+        "android_client_info": {
+          "package_name": "com.ionec.fix234"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "537721283943-fme8agss3ovi9nj5garde8fq91e1n19g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ionec.fix234",
+            "certificate_hash": "75966e7c4a50b0dbf39886f5eb1730a40427eb75"
+          }
+        },
+        {
+          "client_id": "537721283943-9mu25dhtd4m0b02810b5i0ebmg1rsb2b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLt2Vl1kq2uX5_rAfCB1DIULcwIVDg_I0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "537721283943-9mu25dhtd4m0b02810b5i0ebmg1rsb2b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "537721283943-4b8cntc4tdagpc2aa6u8rj5elg6n71r6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ionec.fix234"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537721283943:android:94d3e8ec4b14371993fbc2",
+        "android_client_info": {
+          "package_name": "com.ionec.service_man"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "537721283943-jbmcgtg0cs2d06kl8fiavgb01a65dbuf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ionec.service_man",
+            "certificate_hash": "75966e7c4a50b0dbf39886f5eb1730a40427eb75"
+          }
+        },
+        {
+          "client_id": "537721283943-9mu25dhtd4m0b02810b5i0ebmg1rsb2b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLt2Vl1kq2uX5_rAfCB1DIULcwIVDg_I0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "537721283943-9mu25dhtd4m0b02810b5i0ebmg1rsb2b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "537721283943-4b8cntc4tdagpc2aa6u8rj5elg6n71r6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ionec.fix234"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

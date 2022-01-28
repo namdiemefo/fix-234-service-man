@@ -49,9 +49,10 @@ dependencies:
   tuple: ^2.0.0
   pull_to_refresh: ^2.0.0
   path_provider: ^1.6.27
-#  firebase_core: any
-#  firebase_messaging: any
-#  firebase_messaging: ^7.0.3
+  firebase_core: any
+  overlay_support: ^1.2.1
+  firebase_messaging: any
+  flutter_local_notifications: 4.0.1+2
   flutter_bloc: ^6.0.5
   pin_entry_text_field: ^0.1.4
   another_flushbar: ^1.10.23
