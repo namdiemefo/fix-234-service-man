@@ -13,14 +13,26 @@ import 'package:service_man/helpers/assets/routes.dart';
 import 'package:service_man/helpers/assets/strings.dart';
 import 'package:service_man/helpers/di/service_locator.dart';
 import 'package:service_man/helpers/reusable_screens/app_button.dart';
+import 'package:service_man/helpers/reusable_screens/app_loader.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+        create: (context) => ProfileBloc(),
+        child: _ProfileScreen(),
+    );
+  }
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+
+class _ProfileScreen extends StatefulWidget {
+  @override
+  __ProfileScreenState createState() => __ProfileScreenState();
+}
+
+class __ProfileScreenState extends State<_ProfileScreen> {
 
   final AppStorage _appStorage = locator<AppStorage>();
 
@@ -30,6 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String imageUrl = '';
   ImagePicker picker;
   String user, staffId, phone, image;
+  LoginResponseModel loginResponseModel;
 
   @override
   void initState() {
@@ -38,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void getUser() async {
-    LoginResponseModel loginResponseModel = await _appStorage.getUser();
+    loginResponseModel = await _appStorage.getUser();
     user = loginResponseModel.fullName;
     staffId = loginResponseModel.staffId;
     phone = loginResponseModel.phone;
@@ -62,97 +75,133 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
       backgroundColor: bMilk,
-      body: Padding(
-        padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0, bottom: 20.0),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 50.0,
-                  backgroundImage: image == null || image.isEmpty ? AssetImage(Images.place_holder) : NetworkImage(image),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 70.0),
-                  child: InkWell(
-                      onTap: () {
-                        _showPicker(context);
-                      },
-                      child: Image.asset(Images.camera, height: 15.0, width: 15.0)
+      body: BlocConsumer<ProfileBloc, ProfileState>(
+
+          listenWhen: (prevState, nextState) {
+            if (prevState is ProfileUploadState) {
+              Load.dismiss(context);
+            }
+            return true;
+          },
+            listener: (context, state) {
+
+              if (state is ProfileUploadSuccessState) {
+                loginResponseModel.image = state.image;
+               _appStorage.persistUser(loginResponseModel);
+              }
+
+
+              if (state is ProfileUploadState) {
+                Load.show(context);
+              }
+
+              if (state is ProfileUploadFailureState) {
+                AppUtils.showErrorFlushBar(context, state.error);
+              }
+
+            },
+            builder: (context, state) {
+              if (state is ProfileUploadSuccessState) {
+                image = state.image;
+              }
+              return Padding(
+                  padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0, bottom: 20.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              _showPicker(context);
+                            },
+                            child: CircleAvatar(
+                              radius: 50.0,
+                              backgroundImage: image == null || image.isEmpty ? AssetImage(Images.place_holder) : NetworkImage(image),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 70.0),
+                            child: InkWell(
+                                onTap: () {
+                                  _showPicker(context);
+                                },
+                                child: Image.asset(Images.camera, height: 15.0, width: 15.0)
+                            ),
+                          )
+                        ],
+                      ),
+                      AppUtils.verticalSpacing(height: 50.0),
+                      Row(
+                        children: [
+                          Expanded(
+                              child: TextFormField(
+                                  style: AppUtils.adaptableTextStyle(size: 10.0, color: bBlack, fontWeight: FontWeight.w400),
+                                  controller: nameController,
+                                  enabled: false,
+                                  decoration: InputDecoration(
+                                    labelText: AppStrings.fullName,
+                                    labelStyle: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.w400),
+                                  )
+                              )
+                          )
+                        ],
+                      ),
+                      AppUtils.verticalSpacing(height: 10.0),
+                      Row(
+                        children: [
+                          Expanded(
+                              child: TextFormField(
+                                  style: AppUtils.adaptableTextStyle(size: 10.0, color: bBlack, fontWeight: FontWeight.w400),
+                                  controller: idController,
+                                  decoration: InputDecoration(
+                                    labelText: AppStrings.id,
+                                    enabled: false,
+                                    labelStyle: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.w400),
+                                  )
+                              )
+                          )
+                        ],
+                      ),
+                      AppUtils.verticalSpacing(height: 10.0),
+                      Row(
+                        children: [
+                          Expanded(
+                              child: TextFormField(
+                                  style: AppUtils.adaptableTextStyle(size: 10.0, color: bBlack, fontWeight: FontWeight.w400),
+                                  controller: phoneController,
+                                  decoration: InputDecoration(
+                                    labelText: AppStrings.phoneNumber,
+                                    enabled: false,
+                                    labelStyle: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.w400),
+                                  )
+                              )
+                          )
+                        ],
+                      ),
+                      Spacer(),
+                      Row(
+                        children: [
+                          Expanded(
+                              child: AppButton(
+                                buttonText: AppStrings.logOut,
+                                height: 55.0,
+                                enabledColor: bWhite,
+                                enabled: true,
+                                textColor: bFadedGrey,
+                                voidCallback: () async {
+                                 await _appStorage.clear();
+                                 Navigator.pushNamedAndRemoveUntil(context, AppRoutes.toLoginScreen, (route) => false);
+                                },
+                              )
+                          )
+                        ],
+                      )
+                    ],
                   ),
-                )
-              ],
-            ),
-            AppUtils.verticalSpacing(height: 50.0),
-            Row(
-              children: [
-                Expanded(
-                    child: TextFormField(
-                        style: AppUtils.adaptableTextStyle(size: 10.0, color: bBlack, fontWeight: FontWeight.w400),
-                        controller: nameController,
-                        enabled: false,
-                        decoration: InputDecoration(
-                          labelText: AppStrings.fullName,
-                          labelStyle: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.w400),
-                        )
-                    )
-                )
-              ],
-            ),
-            AppUtils.verticalSpacing(height: 10.0),
-            Row(
-              children: [
-                Expanded(
-                    child: TextFormField(
-                        style: AppUtils.adaptableTextStyle(size: 10.0, color: bBlack, fontWeight: FontWeight.w400),
-                        controller: idController,
-                        decoration: InputDecoration(
-                          labelText: AppStrings.id,
-                          enabled: false,
-                          labelStyle: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.w400),
-                        )
-                    )
-                )
-              ],
-            ),
-            AppUtils.verticalSpacing(height: 10.0),
-            Row(
-              children: [
-                Expanded(
-                    child: TextFormField(
-                        style: AppUtils.adaptableTextStyle(size: 10.0, color: bBlack, fontWeight: FontWeight.w400),
-                        controller: phoneController,
-                        decoration: InputDecoration(
-                          labelText: AppStrings.phoneNumber,
-                          enabled: false,
-                          labelStyle: AppUtils.adaptableTextStyle(size: 10.0, color: bFadedGrey, fontWeight: FontWeight.w400),
-                        )
-                    )
-                )
-              ],
-            ),
-            Spacer(),
-            Row(
-              children: [
-                Expanded(
-                    child: AppButton(
-                      buttonText: AppStrings.logOut,
-                      height: 55.0,
-                      enabledColor: bWhite,
-                      enabled: true,
-                      textColor: bFadedGrey,
-                      voidCallback: () async {
-                       await _appStorage.clear();
-                       Navigator.pushNamedAndRemoveUntil(context, AppRoutes.toLoginScreen, (route) => false);
-                      },
-                    )
-                )
-              ],
-            )
-          ],
-        ),
-      ),
+                );
+          },
+),
     );
   }
 
@@ -189,7 +238,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _imgFromLibrary(BuildContext context) async {
-    File _image = await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    File _image = await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 80);
     if (_image != null) {
       BlocProvider.of<ProfileBloc>(context).add(PickImageEvent(_image));
     }
@@ -198,7 +247,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _imgFromCamera(BuildContext context) async {
-    File _image = await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 50);
+    File _image = await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 80);
     if (_image != null) {
       BlocProvider.of<ProfileBloc>(context).add(PickImageEvent(_image));
     }

@@ -140,17 +140,30 @@ class _Client implements Client {
   }
 
   @override
-  Future<MyResponseModel> bookings(token, search) async {
+  Future<MyResponseModel> bookings(token) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'status': search};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MyResponseModel>(Options(
                 method: 'GET',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
-            .compose(_dio.options, 'technician/booking/', data: _data,
-                queryParameters: queryParameters)
+            .compose(_dio.options, 'technician/booking/', data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = MyResponseModel.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<MyResponseModel> completedBookings(token) async {
+    const _extra = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MyResponseModel>(Options(
+            method: 'GET',
+            headers: <String, dynamic>{r'Authorization': token},
+            extra: _extra)
+            .compose(_dio.options, 'technician/booking/completed', data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyResponseModel.fromJson(_result.data);
     return value;

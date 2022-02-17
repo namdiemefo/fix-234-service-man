@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:service_man/api/models/bookings/response/get_booking_response.dart';
 import 'package:service_man/core/blocs/history/history_bloc.dart';
 import 'package:service_man/helpers/assets/colors.dart';
 import 'package:service_man/helpers/assets/images.dart';
 import 'package:service_man/helpers/assets/strings.dart';
+import 'package:service_man/helpers/reusable_screens/app_list_loader.dart';
 import 'package:service_man/helpers/reusable_screens/shadow_icon.dart';
 import 'package:service_man/helpers/utils/app_utils.dart';
 
@@ -27,6 +29,8 @@ class _HistoryScreen extends StatefulWidget {
 class __HistoryScreenState extends State<_HistoryScreen> {
 
   List<GetBookingResponse> getBookingResponse = [];
+  bool _isLoading =  false;
+  RefreshController _refreshController = RefreshController(initialRefresh: false);
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +46,14 @@ class __HistoryScreenState extends State<_HistoryScreen> {
       ),
       backgroundColor: bMilk,
       body: BlocConsumer<HistoryBloc, HistoryState>(
+
+        listenWhen: (prevState, nextState) {
+          if (prevState is OnHistoryLoading) {
+            _isLoading = false;
+          }
+          return null;
+        },
+
         listener: (context, state) {
           if (state is OnHistoryFailure) {
              getBookingResponse = [];
@@ -49,7 +61,7 @@ class __HistoryScreenState extends State<_HistoryScreen> {
           }
 
           if (state is OnHistoryLoading) {
-
+            _isLoading = true;
           }
 
         },
@@ -57,54 +69,74 @@ class __HistoryScreenState extends State<_HistoryScreen> {
           if (state is OnHistorySuccess) {
             getBookingResponse = state.getBookingResponse;
           }
-          return getBookingResponse.isEmpty ? Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                 Text('You have no completed Job')
-              ],
-            ),
-          ) : Padding(
+          return Padding(
             padding: EdgeInsets.all(24.0),
-            child: ListView.builder(
-                itemCount: getBookingResponse.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: ListTile(
-                      tileColor: bWhite,
-                      contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 26.0),
-                      leading: Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: AdaptableShadowIcon(
-                          iconUrl: Images.gen,
-                          imageHeight: 15.0,
-                          imageWidth: 20.0,
-                          radius: 20.0,
-                          boxShadow: bMilk,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: _isLoading ? AppListLoader() : SizedBox.expand(
+                  child: SmartRefresher(
+                  enablePullDown: true,
+                  enablePullUp: false,
+                  header: ClassicHeader(),
+                  onRefresh: () async {
+                          BlocProvider.of<HistoryBloc>(context).add(FetchHistory());
+                      },
+                      controller: _refreshController,
+                      child: getBookingResponse.isEmpty ? Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('You have no completed Job')
+                          ],
                         ),
-                      ),
-                      title: Text(
-                        '${getBookingResponse[index].name}',
-                        style: AppUtils.adaptableTextStyle(size: 16.0, fontWeight: FontWeight.bold, color: bBlack),
-                      ),
-                      subtitle: Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: Text(
-                          'Order ID: ${getBookingResponse[index].bookingId}',
-                          style: AppUtils.adaptableTextStyle(size: 14.0, fontWeight: FontWeight.w400, color: bBlack),
-                        ),
-                      ),
-                      trailing: Container(
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            boxShadow: [BoxShadow(color: bCheckedColor, spreadRadius: 8.0)]
-                        ),
-                        child: Icon(Icons.check, size: 10.0, color: bWhite),
-                      ),
-                    ),
-                  );
-                }
+                      ) : ListView.builder(
+                          itemCount: getBookingResponse.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10.0),
+                              child: ListTile(
+                                tileColor: bWhite,
+                                contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 26.0),
+                                leading: Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: AdaptableShadowIcon(
+                                    iconUrl: Images.gen,
+                                    imageHeight: 15.0,
+                                    imageWidth: 20.0,
+                                    radius: 20.0,
+                                    boxShadow: bMilk,
+                                  ),
+                                ),
+                                title: Text(
+                                  '${getBookingResponse[index].name}',
+                                  style: AppUtils.adaptableTextStyle(size: 16.0, fontWeight: FontWeight.bold, color: bBlack),
+                                ),
+                                subtitle: Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: Text(
+                                    'Order ID: ${getBookingResponse[index].bookingId}',
+                                    style: AppUtils.adaptableTextStyle(size: 14.0, fontWeight: FontWeight.w400, color: bBlack),
+                                  ),
+                                ),
+                                trailing: Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      boxShadow: [BoxShadow(color: bCheckedColor, spreadRadius: 8.0)]
+                                  ),
+                                  child: Icon(Icons.check, size: 10.0, color: bWhite),
+                                ),
+                              ),
+                            );
+                          }
+                      )
+
+                  ),
+                  ),
+                )
+              ],
             ),
           );
         },

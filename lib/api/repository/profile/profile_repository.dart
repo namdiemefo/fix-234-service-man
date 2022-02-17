@@ -45,7 +45,7 @@ class ProfileRepository extends ProfileInterface {
   @override
   Future<Tuple2<String, String>> uploadImage({String token, File file}) async {
     try {
-      MyResponseModel myResponseModel = await client.bookings(token, "1");
+      MyResponseModel myResponseModel = await client.uploadImage(token, file);
       if (myResponseModel.code == 200) {
         String response = myResponseModel.data;
         return Tuple2(response, null);

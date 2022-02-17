@@ -46,7 +46,10 @@ abstract class Client {
 
   //BOOKING
   @GET('technician/booking/')
-  Future<MyResponseModel> bookings(@Header('Authorization') String token, @Query("status") String search);
+  Future<MyResponseModel> bookings(@Header('Authorization') String token);
+
+  @GET('technician/booking/completed')
+  Future<MyResponseModel> completedBookings(@Header('Authorization') String token);
 
   @PUT('technician/booking/status')
   Future<MyResponseModel> status(@Header('Authorization') String token, @Body() UpdateStatusRequestModel updateStatusRequestModel);

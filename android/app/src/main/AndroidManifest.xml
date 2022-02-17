@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ionec.service_man">
    <application
-        android:label="service_man"
+        android:label="Fix234 Technician"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

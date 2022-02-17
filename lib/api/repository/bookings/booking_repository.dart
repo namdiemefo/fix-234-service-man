@@ -41,7 +41,7 @@ class BookingRepository extends BookingInterface {
   Future<Tuple2<List<GetBookingResponse> , String>> getPendingJobs({String token}) async {
     
     try {
-      MyResponseModel myResponseModel = await client.bookings(token, "");
+      MyResponseModel myResponseModel = await client.bookings(token);
       if (myResponseModel.code == 200) {
         List response = myResponseModel.data;
         List<GetBookingResponse> getBookingResponse = List<GetBookingResponse>.unmodifiable(
@@ -62,7 +62,7 @@ class BookingRepository extends BookingInterface {
   Future<Tuple2<MyResponseModel, String>> requestReassignment({String reason, String bookingId, String token}) async {
 
     try {
-      MyResponseModel myResponseModel = await client.bookings(token, "1");
+      MyResponseModel myResponseModel = await client.completedBookings(token);
       if (myResponseModel.code == 200) {
         return Tuple2(myResponseModel, null);
       } else {
@@ -79,7 +79,7 @@ class BookingRepository extends BookingInterface {
   Future<Tuple2<MyResponseModel, String>> updateStatus({String status, String bookingId, String token}) async {
 
     try {
-      MyResponseModel myResponseModel = await client.bookings(token, "");
+      MyResponseModel myResponseModel = await client.completedBookings(token);
       if (myResponseModel.code == 200) {
         return Tuple2(myResponseModel, null);
       } else {
@@ -96,7 +96,7 @@ class BookingRepository extends BookingInterface {
   Future<Tuple2<List<GetBookingResponse>, String>> getJobHistory({String token}) async {
 
     try {
-      MyResponseModel myResponseModel = await client.bookings(token, "1");
+      MyResponseModel myResponseModel = await client.completedBookings(token);
       if (myResponseModel.code == 200) {
         List response = myResponseModel.data;
         List<GetBookingResponse> getBookingResponse = List<GetBookingResponse>.unmodifiable(

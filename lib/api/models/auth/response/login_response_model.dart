@@ -58,6 +58,11 @@ class LoginResponseModel {
   String get updatedAt => _updatedAt;
   int get v => _v;
 
+  // ignore: unnecessary_getters_setters
+  set image(String newImage) {
+    _image = newImage;
+  }
+
   LoginResponseModel({
       int firstTime, 
       bool isEmailVerified, 
