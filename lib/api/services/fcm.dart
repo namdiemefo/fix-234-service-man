@@ -6,9 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:service_man/api/models/fcm/push_notification_model.dart';
-import 'package:service_man/api/models/fcm/token_model.dart';
-import 'package:service_man/api/repository/auth/auth_repository.dart';
-import 'package:service_man/helpers/di/service_locator.dart';
 
 Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message?.messageId}");

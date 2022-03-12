@@ -331,6 +331,7 @@ class __PreviewScreenState extends State<_PreviewScreen> {
                                 booking: widget.bookingId,
                                 partsTotal: _getPartsTotal(widget.equipment),
                                 servicingTotal: _getServicingTotal(widget.equipment),
+                                equipment: widget.equipment,
                                 report: '',
                                 total: _calculateTotal(widget.equipment)
                               );

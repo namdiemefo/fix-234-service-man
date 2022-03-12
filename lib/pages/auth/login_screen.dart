@@ -102,8 +102,8 @@ class __LoginScreenState extends State<_LoginScreen> {
                                   _id = value.trim();
                                 },
                                 decoration: InputDecoration(
-                                  hintText: AppStrings.idHint,
-                                  helperText: AppStrings.idHelperText,
+                                  hintText: AppStrings.idHelperText,
+                                  // helperText: AppStrings.idHelperText,
                                   hintStyle: AppUtils.adaptableTextStyle(size: 14.0, color: bHintColor, fontWeight: FontWeight.w400),
                                 ),
                               )
