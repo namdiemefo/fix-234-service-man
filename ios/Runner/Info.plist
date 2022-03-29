@@ -31,11 +31,11 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>events</string>
 	<key>NSCameraUsageDescription</key>
-	<string>overlay feature</string>
+	<string>Need camera access to upload images</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Store Locator</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Saving selected wallpaper</string>
+	<string>Need library access to upload images</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
