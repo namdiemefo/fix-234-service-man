@@ -31,11 +31,11 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>events</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Need camera access to upload images</string>
+	<string>We use the data from the camera for image upload</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Store Locator</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Need library access to upload images</string>
+	<string>We use the data from the gallery for file upload</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
