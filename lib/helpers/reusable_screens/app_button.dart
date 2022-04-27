@@ -42,7 +42,7 @@ class AppButton extends StatelessWidget {
             child: Text(
               buttonText,
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 14.0,
                 fontWeight: FontWeight.w600,
                 color: textColor == null ? bWhite : textColor,
                 // letterSpacing: 0.88,

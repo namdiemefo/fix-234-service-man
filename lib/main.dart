@@ -1,8 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:service_man/api/services/fcm.dart';
 import 'package:service_man/core/global/bloc/global_event.dart';
 import 'package:service_man/core/global/provider/global_provider.dart';
 import 'package:service_man/helpers/assets/routes.dart';
@@ -12,7 +15,7 @@ import 'package:service_man/pages/bill/category_screen.dart';
 import 'package:service_man/pages/bill/equipment_screen.dart';
 import 'package:service_man/pages/bill/parts_screen.dart';
 import 'package:service_man/pages/bill/preview_screen.dart';
-import 'package:service_man/pages/bill/service_charge_screen.dart';
+import 'package:service_man/pages/bill/servicing_screen.dart';
 import 'package:service_man/pages/bill/success_screen.dart';
 import 'package:service_man/pages/booking/details_screen.dart';
 import 'package:service_man/pages/booking/summary_screen.dart';
@@ -20,12 +23,15 @@ import 'package:service_man/pages/home/home_screen.dart';
 import 'package:service_man/pages/splash/splash_screen.dart';
 
 import 'core/global/bloc/global_bloc.dart';
+import 'main_bloc_observer.dart';
 import 'pages/auth/login_screen.dart';
 
 void main() {
 
+  Bloc.observer = MainBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   setUpLocator();
+  setUpMessaging();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp
   ]);
@@ -41,6 +47,16 @@ void main() {
       ));
 }
 
+void setUpMessaging() {
+
+  Firebase.initializeApp().then((value) async {
+
+   PushNotificationService.instance.setUpPlatformNotifications();
+
+  });
+
+}
+
 class ServiceManApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -51,6 +67,7 @@ class ServiceManApp extends StatelessWidget {
         designSize: Size(375, 812),
         builder: () =>
             MaterialApp(
+              debugShowCheckedModeBanner: false,
               title: 'Service Man',
               initialRoute: '/',
               onGenerateRoute: _getRoutes,
@@ -175,31 +192,38 @@ class NavigationPageState extends State<NavigationPage>
         break;
 
       case AppRoutes.toDetailScreen:
-        builder = DetailScreen();
+        DetailScreenArgument args = settings.arguments;
+        builder = DetailScreen(getBookingResponse: args.getBookingResponse);
         break;
 
       case AppRoutes.toSummaryScreen:
-        builder = SummaryScreen();
+        SummaryArguments args = settings.arguments;
+        builder = SummaryScreen(bookingId: args.bookingId);
         break;
 
       case AppRoutes.toEquipmentScreen:
-        builder = EquipmentScreen();
+        EquipmentScreenArgument args = settings.arguments;
+        builder = EquipmentScreen(service: args.service, bookingId: args.bookingId);
         break;
 
       case AppRoutes.toBillCategoryScreen:
-        builder = CategoryScreen();
+        CategoryScreenArguments args = settings.arguments;
+        builder = CategoryScreen(equipment: args.equipment);
         break;
 
       case AppRoutes.toBillPartsScreen:
-        builder = PartsScreen();
+        PartsScreenArguments args = settings.arguments;
+        builder = PartsScreen(equipment: args.equipment);
         break;
 
       case AppRoutes.toBillServiceScreen:
-        builder = ServiceChargeScreen();
+        ServiceScreenArguments args = settings.arguments;
+        builder = ServicingScreen(equipment: args.equipment);
         break;
 
       case AppRoutes.toBillPreviewScreen:
-        builder = PreviewScreen();
+        PreviewScreenArguments args = settings.arguments;
+        builder = PreviewScreen(equipment: args.equipments, serviceName: args.serviceName, bookingId: args.bookingId);
         break;
 
       case AppRoutes.toBillSuccessScreen:

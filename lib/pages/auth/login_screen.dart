@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:service_man/core/login/login_bloc.dart';
+import 'package:service_man/core/blocs/login/login_bloc.dart';
 import 'package:service_man/helpers/assets/colors.dart';
 import 'package:service_man/helpers/assets/routes.dart';
 import 'package:service_man/helpers/assets/strings.dart';
@@ -102,8 +102,8 @@ class __LoginScreenState extends State<_LoginScreen> {
                                   _id = value.trim();
                                 },
                                 decoration: InputDecoration(
-                                  hintText: AppStrings.idHint,
-                                  helperText: AppStrings.idHelperText,
+                                  hintText: AppStrings.idHelperText,
+                                  // helperText: AppStrings.idHelperText,
                                   hintStyle: AppUtils.adaptableTextStyle(size: 14.0, color: bHintColor, fontWeight: FontWeight.w400),
                                 ),
                               )
@@ -160,23 +160,23 @@ class __LoginScreenState extends State<_LoginScreen> {
               ),
               AppUtils.verticalSpacing(height: 10.0),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                      onPressed: () {
-                        // final route = MaterialPageRoute(builder: (context) => RegisterPage());
-                        // Navigator.push(context, route);
-                      },
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                          padding: MaterialStateProperty.all(EdgeInsets.zero),
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap
-                      ),
-                      child: Text(AppStrings.forgotPassword, style: TextStyle(fontSize: 12.0 ,color: bPurple) )
-                  )
-                ],
-              )
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   children: [
+              //     TextButton(
+              //         onPressed: () {
+              //           // final route = MaterialPageRoute(builder: (context) => RegisterPage());
+              //           // Navigator.push(context, route);
+              //         },
+              //         style: ButtonStyle(
+              //             backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+              //             padding: MaterialStateProperty.all(EdgeInsets.zero),
+              //             tapTargetSize: MaterialTapTargetSize.shrinkWrap
+              //         ),
+              //         child: Text(AppStrings.forgotPassword, style: TextStyle(fontSize: 12.0 ,color: bPurple) )
+              //     )
+              //   ],
+              // )
 
             ],
           ),

@@ -31,6 +31,8 @@ class GetBookingResponse {
   String _name;
   String _service;
   String _user;
+  String _userImage;
+  String _userPhone;
   String _description;
   String _time;
   String _owner;
@@ -54,6 +56,8 @@ class GetBookingResponse {
   String get name => _name;
   String get service => _service;
   String get user => _user;
+  String get userImage => _userImage;
+  String get userPhone => _userPhone;
   String get description => _description;
   String get time => _time;
   String get owner => _owner;
@@ -77,7 +81,9 @@ class GetBookingResponse {
       String id, 
       String name, 
       String service, 
-      String user, 
+      String user,
+      String userImage,
+      String userPhone,
       String description, 
       String time, 
       String owner, 
@@ -100,6 +106,8 @@ class GetBookingResponse {
     _name = name;
     _service = service;
     _user = user;
+    _userImage = userImage;
+    _userPhone = userPhone;
     _description = description;
     _time = time;
     _owner = owner;
@@ -125,6 +133,8 @@ class GetBookingResponse {
     _name = json["name"];
     _service = json["service"];
     _user = json["user"];
+    _userImage = json["user_image"];
+    _userPhone = json["userPhone"];
     _description = json["description"];
     _time = json["time"];
     _owner = json["owner"];
@@ -151,6 +161,8 @@ class GetBookingResponse {
     map["name"] = _name;
     map["service"] = _service;
     map["user"] = _user;
+    map["user_image"] = _userImage;
+    map["userPhone"] = _userPhone;
     map["description"] = _description;
     map["time"] = _time;
     map["owner"] = _owner;

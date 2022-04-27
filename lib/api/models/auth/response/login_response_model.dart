@@ -30,6 +30,7 @@ class LoginResponseModel {
   String _email;
   String _phone;
   String _type;
+  String _image;
   String _password;
   String _staffId;
   String _token;
@@ -49,12 +50,18 @@ class LoginResponseModel {
   String get email => _email;
   String get phone => _phone;
   String get type => _type;
+  String get image => _image;
   String get password => _password;
   String get staffId => _staffId;
   String get token => _token;
   String get createdAt => _createdAt;
   String get updatedAt => _updatedAt;
   int get v => _v;
+
+  // ignore: unnecessary_getters_setters
+  set image(String newImage) {
+    _image = newImage;
+  }
 
   LoginResponseModel({
       int firstTime, 
@@ -68,7 +75,8 @@ class LoginResponseModel {
       String fullName, 
       String email, 
       String phone, 
-      String type, 
+      String type,
+      String image,
       String password, 
       String staffId, 
       String token, 
@@ -87,6 +95,7 @@ class LoginResponseModel {
     _email = email;
     _phone = phone;
     _type = type;
+    _image = image;
     _password = password;
     _staffId = staffId;
     _token = token;
@@ -108,6 +117,7 @@ class LoginResponseModel {
     _email = json["email"];
     _phone = json["phone"];
     _type = json["type"];
+    _image = json["image"];
     _password = json["password"];
     _staffId = json["staffId"];
     _token = json["token"];
@@ -130,6 +140,7 @@ class LoginResponseModel {
     map["email"] = _email;
     map["phone"] = _phone;
     map["type"] = _type;
+    map["image"] = _image;
     map["password"] = _password;
     map["staffId"] = _staffId;
     map["token"] = _token;

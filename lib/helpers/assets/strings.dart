@@ -14,12 +14,12 @@ class AppStrings {
   static const fullName = 'Full Name';
   static const id = 'ID';
   static const dateOrdered = 'Date Ordered';
-  static const time = 'time';
+  static const time = 'Time';
   static const service = 'Service';
   static const frequency = 'Frequency';
   static const numberOfEquipment = 'Number of Equipments';
   static const orderId = 'Order ID';
-  static const serviceDescription = 'serviceDescription';
+  static const serviceDescription = 'Service Description';
   static const customerInfo = 'Customer Info';
   static const pendingJobs = 'Pending Jobs';
   static const phoneNumber = 'Phone Number';
@@ -29,9 +29,10 @@ class AppStrings {
   static const equipmentName = 'Equipment Name';
   static const noEquipmentText = 'Add equipment serviced or worked on to create bill';
   static const logOut = 'Log out';
-  static const chargeHint = 'Search by service charge name';
+  static const chargeHint = 'Search by service name';
   static const partsHint = 'Search by part name';
   static const requestDetails = 'Request Details';
+  static const summaryReport = 'Summary Report';
   static const parts = 'Parts';
   static const serviceChargeList = 'Service Charge List';
   static const partsList = 'Parts List';
@@ -40,7 +41,7 @@ class AppStrings {
   static const passwordHint = 'Password';
   static const passwordError = 'Enter Password';
   static const idError = 'Enter valid ID';
-  static const idHelperText = 'FIX-1234';
+  static const idHelperText = 'FX-1234';
   static const forgotPassword = 'Forgot Password?';
   static const idHint = 'Fix-234 Valid ID';
   static const welcomeTo = 'Welcome to';

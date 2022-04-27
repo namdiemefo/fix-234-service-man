@@ -1,6 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:service_man/helpers/assets/colors.dart';
 import 'package:service_man/helpers/assets/strings.dart';
 
@@ -72,8 +73,6 @@ class AppUtils {
             child: Text(
               error,
               style: adaptableTextStyle(size: 10.0, color: bWhite, fontWeight: FontWeight.normal),
-              // style: BloommAssets.adaptableTextStyle(
-              //     size: 12, fontWeight: FontWeight.w400, color: bBadge),
             ),
           ),
         ],
@@ -86,6 +85,12 @@ class AppUtils {
 
   static Color hexToColor(String code) {
     return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+  }
+
+  static String convertDate(String date) {
+    DateTime dateTime = DateTime.parse(date);
+    var format = DateFormat('dd MMMM, yyyy');
+    return '${format.format(dateTime)}';
   }
 
 
