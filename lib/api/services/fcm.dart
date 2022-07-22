@@ -87,7 +87,7 @@ class PushNotificationService {
     // set up background message handler
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     AndroidInitializationSettings androidInitializationSettings =
-        AndroidInitializationSettings('@drawable/bloomm_notification');
+        AndroidInitializationSettings('@drawable/launcher_icon');
     IOSInitializationSettings iosInitializationSettings =
     IOSInitializationSettings();
 
