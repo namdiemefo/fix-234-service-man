@@ -7,8 +7,16 @@ class AppStrings {
   static const createBill = 'Create Bill';
   static const previewBill = 'Preview Bill';
   static const home = 'Home';
+  static const sendRequest = 'Send Request';
   static const completeJob = 'Complete Job';
   static const callClient = 'Call Client';
+  static const requestAssistant = 'Request Assistant';
+  static const leadServiceman = 'Lead Serviceman';
+  static const assistantServiceman = 'Assistant Serviceman';
+  static const requestAnAssistant = 'Request an Assistant';
+  static const selectNumberOfAssistant = 'Select number of assistant needed';
+  static const requestAnAssistantMessage = 'Request for an assistant to get the';
+  static const jobDoneQuickly = 'job done quickly';
   static const billCategory = 'Bill Category';
   static const profile = 'Profile';
   static const fullName = 'Full Name';

@@ -10,6 +10,8 @@ abstract class BookingInterface {
 
   Future<Tuple2<MyResponseModel, String>> updateStatus({String status, String bookingId, String token});
 
+  Future<Tuple2<MyResponseModel, String>> requestForAssistance({int number, String bookingId, String token});
+
   Future<Tuple2<MyResponseModel, String>> requestReassignment({String reason, String bookingId, String token});
 
 }

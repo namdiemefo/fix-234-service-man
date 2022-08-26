@@ -6,6 +6,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 class GlobalProvider extends ChangeNotifier {
   bool _signInStatus;
   final AppStorage _appStorage = locator<AppStorage>();
+  int _technicians = 1;
+
+  int get technicians => _technicians;
+
+  addTechnicians () {
+    _technicians ++;
+    notifyListeners();
+  }
+
+  removeTechnicians() {
+    _technicians == 1 ? _technicians = _technicians : _technicians--;
+    notifyListeners();
+  }
 
   bool get signInStatus {
     return _signInStatus ?? false;

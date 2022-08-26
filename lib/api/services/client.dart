@@ -10,13 +10,14 @@ import 'package:service_man/api/models/auth/request/verify_otp_request_model.dar
 import 'package:service_man/api/models/bill/complete_bill_request.dart';
 import 'package:service_man/api/models/bill/create_bill_model.dart';
 import 'package:service_man/api/models/bookings/request/reassignment_request_model.dart';
+import 'package:service_man/api/models/bookings/request/request_for_assistance_request.dart';
 import 'package:service_man/api/models/bookings/request/update_status_request_model.dart';
 import 'package:service_man/api/models/fcm/token_model.dart';
 import 'package:service_man/api/models/response_model.dart';
 
 part 'client.g.dart';
 
-@RestApi(baseUrl: "https://fix-234.herokuapp.com/")
+@RestApi(baseUrl: "https://fix234.herokuapp.com/")
 abstract class Client {
   factory Client(Dio dio, {String baseUrl}) = _Client;
 
@@ -56,6 +57,9 @@ abstract class Client {
 
   @PUT('technician/booking/request')
   Future<MyResponseModel> request(@Header('Authorization') String token, @Body() ReassignmentRequestModel reassignmentRequestModel);
+
+  @PUT('technician/booking/assistant-request')
+  Future<MyResponseModel> requestForAssistance(@Header('Authorization') String token, @Body() RequestForAssistanceRequest requestForAssistanceRequest);
 
   //BILL
   @POST('technician/booking/bill')
