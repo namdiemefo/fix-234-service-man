@@ -97,38 +97,97 @@ class __HistoryScreenState extends State<_HistoryScreen> {
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(vertical: 10.0),
-                              child: ListTile(
-                                tileColor: bWhite,
-                                contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 26.0),
-                                leading: Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: AdaptableShadowIcon(
-                                    iconUrl: Images.gen,
-                                    imageHeight: 15.0,
-                                    imageWidth: 20.0,
-                                    radius: 20.0,
-                                    boxShadow: bMilk,
-                                  ),
-                                ),
-                                title: Text(
-                                  '${getBookingResponse[index].name}',
-                                  style: AppUtils.adaptableTextStyle(size: 16.0, fontWeight: FontWeight.bold, color: bBlack),
-                                ),
-                                subtitle: Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: Text(
-                                    'Order ID: ${getBookingResponse[index].bookingId}',
-                                    style: AppUtils.adaptableTextStyle(size: 14.0, fontWeight: FontWeight.w400, color: bBlack),
-                                  ),
-                                ),
-                                trailing: Container(
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      boxShadow: [BoxShadow(color: bCheckedColor, spreadRadius: 8.0)]
-                                  ),
-                                  child: Icon(Icons.check, size: 10.0, color: bWhite),
+                              child: Container(
+                                color: bWhite,
+                                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 26.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    AdaptableShadowIcon(
+                                      iconUrl: Images.gen,
+                                      imageHeight: 15.0,
+                                      imageWidth: 20.0,
+                                      radius: 20.0,
+                                      boxShadow: bMilk,
+                                    ),
+
+                                    AppUtils.horizontalSpacing(width: 1.0),
+
+                                    Expanded(child: Column(
+                                      children: [
+                                        Text(
+                                          '${getBookingResponse[index].name}',
+                                          style: AppUtils.adaptableTextStyle(size: 16.0, fontWeight: FontWeight.bold, color: bBlack),
+                                        ),
+                                        AppUtils.verticalSpacing(height: 3.0),
+                                        Container(
+                                          height: 35,
+                                          color: getBookingResponse[index].assistantTechnicianId.contains(getBookingResponse[index].id) ? bYellow : bPurple,
+                                          child: Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text(
+                                              getBookingResponse[index].assistantTechnicianId.contains(getBookingResponse[index].id) ? 'Assistant Serviceman' : 'Lead Serviceman',
+                                              style: AppUtils.adaptableTextStyle(size: 12.0, fontWeight: FontWeight.w400, color: bWhite),
+                                            ),
+                                          ),
+                                        ),
+                                        AppUtils.verticalSpacing(height: 3.0),
+                                        Text(
+                                          'Order ID: ${getBookingResponse[index].bookingId}',
+                                          style: AppUtils.adaptableTextStyle(size: 14.0, fontWeight: FontWeight.w400, color: bBlack),
+                                        ),
+                                        AppUtils.verticalSpacing(height: 3.0),
+
+
+                                      ],
+
+                                    )),
+
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          boxShadow: [BoxShadow(color: bCheckedColor, spreadRadius: 8.0)]
+                                      ),
+                                      child: Icon(Icons.check, size: 10.0, color: bWhite),
+                                    ),
+
+                                  ],
+
                                 ),
                               ),
+                              // child: ListTile(
+                              //   tileColor: bWhite,
+                              //   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 26.0),
+                              //
+                              //   leading: Padding(
+                              //     padding: const EdgeInsets.only(top: 8.0),
+                              //     child: AdaptableShadowIcon(
+                              //       iconUrl: Images.gen,
+                              //       imageHeight: 15.0,
+                              //       imageWidth: 20.0,
+                              //       radius: 20.0,
+                              //       boxShadow: bMilk,
+                              //     ),
+                              //   ),
+                              //   title: Text(
+                              //     '${getBookingResponse[index].name}',
+                              //     style: AppUtils.adaptableTextStyle(size: 16.0, fontWeight: FontWeight.bold, color: bBlack),
+                              //   ),
+                              //   subtitle: Padding(
+                              //     padding: const EdgeInsets.only(top: 8.0),
+                              //     child: Text(
+                              //       'Order ID: ${getBookingResponse[index].bookingId}',
+                              //       style: AppUtils.adaptableTextStyle(size: 14.0, fontWeight: FontWeight.w400, color: bBlack),
+                              //     ),
+                              //   ),
+                              //   trailing: Container(
+                              //     decoration: BoxDecoration(
+                              //         shape: BoxShape.circle,
+                              //         boxShadow: [BoxShadow(color: bCheckedColor, spreadRadius: 8.0)]
+                              //     ),
+                              //     child: Icon(Icons.check, size: 10.0, color: bWhite),
+                              //   ),
+                              // ),
                             );
                           }
                       )

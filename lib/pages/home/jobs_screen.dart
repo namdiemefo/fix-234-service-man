@@ -150,8 +150,23 @@ class __JobScreenState extends State<_JobScreen> {
                               child: Stack(
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
+
+                                      Container(
+                                        height: 35,
+                                        color: getBookingResponse[index].assistantTechnicianId.contains(getBookingResponse[index].id) ? bYellow : bPurple,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            getBookingResponse[index].assistantTechnicianId.contains(getBookingResponse[index].id) ? 'Assistant Serviceman' : 'Lead Serviceman',
+                                            style: AppUtils.adaptableTextStyle(size: 12.0, fontWeight: FontWeight.w400, color: bWhite),
+                                          ),
+                                        ),
+                                      ),
+
+                                      AppUtils.verticalSpacing(height: 10.0),
+
                                       Text(
                                         '${getBookingResponse[index].name} Service',
                                         style: AppUtils.adaptableTextStyle(size: 16.0, fontWeight: FontWeight.normal, color: bBlack),
